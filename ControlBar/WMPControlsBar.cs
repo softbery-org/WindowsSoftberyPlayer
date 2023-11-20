@@ -1,4 +1,4 @@
-// Version: 1.0.0.166
+// Version: 1.0.0.167
 using AxWMPLib;
 using System;
 using System.IO;

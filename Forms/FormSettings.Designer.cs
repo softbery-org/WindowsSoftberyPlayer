@@ -1,4 +1,4 @@
-// Version: 1.0.0.167
+// Version: 1.0.0.168
 namespace WindowsSoftberyPlayer.Forms
 {
     partial class FormSettings

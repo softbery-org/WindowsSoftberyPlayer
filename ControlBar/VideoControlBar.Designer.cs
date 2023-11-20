@@ -1,4 +1,4 @@
-// Version: 1.0.0.164
+// Version: 1.0.0.165
 namespace WindowsSoftberyPlayer.ControlBar
 {
     partial class VideoControlBar
