@@ -18,6 +18,8 @@
 .sbver
 .sbver_files
 *.code-workspace
+NuGet
+packages/
 
 # User-specific files (MonoDevelop/Xamarin Studio)
 *.userprefs

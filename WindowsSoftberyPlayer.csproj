@@ -46,14 +46,49 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Form1.cs">
+    <Compile Include="ControlBar\VideoControlBar.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ControlBar\VideoControlBar.Designer.cs">
+      <DependentUpon>VideoControlBar.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ControlBar\WMPControlsBar.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ControlBar\WMPControlsBar.Designer.cs">
+      <DependentUpon>WMPControlsBar.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Filters\KeyPressFilter.cs" />
+    <Compile Include="Filters\MouseMoveFilter.cs" />
+    <Compile Include="Forms\FormLogs.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <Compile Include="Forms\FormLogs.Designer.cs">
+      <DependentUpon>FormLogs.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\FormMain.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\FormMain.Designer.cs">
+      <DependentUpon>FormMain.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\FormSettings.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\FormSettings.Designer.cs">
+      <DependentUpon>FormSettings.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Labels\LabelEventName.cs">
+      <SubType>Component</SubType>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="ControlBar\VideoControlBar.resx">
+      <DependentUpon>VideoControlBar.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FormMain.resx">
+      <DependentUpon>FormMain.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -62,7 +97,12 @@
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
     </Compile>
+    <None Include="..\.editorconfig">
+      <Link>.editorconfig</Link>
+    </None>
+    <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -78,7 +118,58 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include=".gitignore" />
+    <None Include="Resources\stop-hover.png" />
+    <None Include="Resources\stop.png" />
+    <None Include="Resources\shuffle.png" />
+    <None Include="Resources\settings-hover.png" />
+    <None Include="Resources\settings.png" />
+    <None Include="Resources\rewind.png" />
+    <None Include="Resources\resume.png" />
+    <None Include="Resources\replay.png" />
+    <None Include="Resources\repeat-one.png" />
+    <None Include="Resources\repeat.png" />
+    <None Include="Resources\play-hover.png" />
+    <None Include="Resources\play.png" />
+    <None Include="Resources\pause-hover.png" />
+    <None Include="Resources\pause.png" />
+    <None Include="Resources\open-hover.png" />
+    <None Include="Resources\open.png" />
+    <None Include="Resources\mute.png" />
+    <None Include="Resources\low-volume.png" />
+    <None Include="Resources\fullscreen-hover.png" />
+    <None Include="Resources\fullscreen-full-hover.png" />
+    <None Include="Resources\fullscreen-full.png" />
+    <None Include="Resources\fullscreen.png" />
+    <None Include="Resources\forward.png" />
+    <None Include="Resources\end.png" />
+    <None Include="Resources\audio.png" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\ColorSlider\ColorSlider.csproj">
+      <Project>{d3ebc32a-efb0-4684-9124-6f777428150d}</Project>
+      <Name>ColorSlider</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <COMReference Include="AxWMPLib">
+      <Guid>{6BF52A50-394A-11D3-B153-00C04F79FAA6}</Guid>
+      <VersionMajor>1</VersionMajor>
+      <VersionMinor>0</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>aximp</WrapperTool>
+      <Isolated>False</Isolated>
+    </COMReference>
+    <COMReference Include="WMPLib">
+      <Guid>{6BF52A50-394A-11D3-B153-00C04F79FAA6}</Guid>
+      <VersionMajor>1</VersionMajor>
+      <VersionMinor>0</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>tlbimp</WrapperTool>
+      <Isolated>False</Isolated>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </COMReference>
+  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="PostBuild" AfterTargets="Build">
     <Exec Command="..\.softbery\bin\Debug\net8.0\softbery.exe" />

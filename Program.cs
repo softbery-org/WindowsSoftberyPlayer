@@ -1,4 +1,4 @@
-// Version: 1.0.0.3
+// Version: 1.0.0.171
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,7 +17,7 @@ namespace WindowsSoftberyPlayer
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Form1());
+            Application.Run(new Forms.FormMain());
         }
     }
 }
