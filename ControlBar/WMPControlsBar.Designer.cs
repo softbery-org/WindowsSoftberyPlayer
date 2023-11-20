@@ -1,5 +1,4 @@
-// Version: 1.0.0.167
-namespace WindowsSoftberyPlayer.ControlBar
+﻿namespace WindowsSoftberyPlayer.ControlBar
 {
     partial class WMPControlsBar
     {
@@ -158,7 +157,7 @@ namespace WindowsSoftberyPlayer.ControlBar
             // 
             this.pbSettings.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.pbSettings.BackColor = System.Drawing.Color.Transparent;
-            this.pbSettings.Image = global::WindowsSoftberyPlayer.Properties.Resources.settings;
+            this.pbSettings.Image = global::Properties.Resources.settings;
             this.pbSettings.Location = new System.Drawing.Point(631, 32);
             this.pbSettings.Name = "pbSettings";
             this.pbSettings.Size = new System.Drawing.Size(40, 40);
@@ -170,7 +169,7 @@ namespace WindowsSoftberyPlayer.ControlBar
             // 
             this.pbVolumeDown.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.pbVolumeDown.BackColor = System.Drawing.Color.Transparent;
-            this.pbVolumeDown.Image = global::WindowsSoftberyPlayer.Properties.Resources.low_volume;
+            this.pbVolumeDown.Image = global::Properties.Resources.low_volume;
             this.pbVolumeDown.Location = new System.Drawing.Point(579, 12);
             this.pbVolumeDown.Name = "pbVolumeDown";
             this.pbVolumeDown.Size = new System.Drawing.Size(20, 20);
@@ -196,7 +195,7 @@ namespace WindowsSoftberyPlayer.ControlBar
             // 
             this.pbVolumeUp.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.pbVolumeUp.BackColor = System.Drawing.Color.Transparent;
-            this.pbVolumeUp.Image = global::WindowsSoftberyPlayer.Properties.Resources.audio;
+            this.pbVolumeUp.Image = global::Properties.Resources.audio;
             this.pbVolumeUp.Location = new System.Drawing.Point(651, 12);
             this.pbVolumeUp.Name = "pbVolumeUp";
             this.pbVolumeUp.Size = new System.Drawing.Size(20, 20);
@@ -209,7 +208,7 @@ namespace WindowsSoftberyPlayer.ControlBar
             // 
             this.pbMute.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.pbMute.BackColor = System.Drawing.Color.Transparent;
-            this.pbMute.Image = global::WindowsSoftberyPlayer.Properties.Resources.mute;
+            this.pbMute.Image = global::Properties.Resources.mute;
             this.pbMute.Location = new System.Drawing.Point(553, 12);
             this.pbMute.Name = "pbMute";
             this.pbMute.Size = new System.Drawing.Size(20, 20);
@@ -235,7 +234,7 @@ namespace WindowsSoftberyPlayer.ControlBar
             // 
             this.pbOpen.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.pbOpen.BackColor = System.Drawing.Color.Transparent;
-            this.pbOpen.Image = global::WindowsSoftberyPlayer.Properties.Resources.open;
+            this.pbOpen.Image = global::Properties.Resources.open;
             this.pbOpen.Location = new System.Drawing.Point(677, 32);
             this.pbOpen.Name = "pbOpen";
             this.pbOpen.Size = new System.Drawing.Size(40, 40);
@@ -248,7 +247,7 @@ namespace WindowsSoftberyPlayer.ControlBar
             // 
             this.pbForward.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.pbForward.BackColor = System.Drawing.Color.Transparent;
-            this.pbForward.Image = global::WindowsSoftberyPlayer.Properties.Resources.forward;
+            this.pbForward.Image = global::Properties.Resources.forward;
             this.pbForward.Location = new System.Drawing.Point(723, 32);
             this.pbForward.Name = "pbForward";
             this.pbForward.Size = new System.Drawing.Size(40, 40);
@@ -260,7 +259,7 @@ namespace WindowsSoftberyPlayer.ControlBar
             // 
             this.pbFullscreen.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.pbFullscreen.BackColor = System.Drawing.Color.Transparent;
-            this.pbFullscreen.Image = global::WindowsSoftberyPlayer.Properties.Resources.fullscreen;
+            this.pbFullscreen.Image = global::Properties.Resources.fullscreen;
             this.pbFullscreen.Location = new System.Drawing.Point(769, 32);
             this.pbFullscreen.Name = "pbFullscreen";
             this.pbFullscreen.Size = new System.Drawing.Size(40, 40);
@@ -273,7 +272,7 @@ namespace WindowsSoftberyPlayer.ControlBar
             // 
             this.pbStop.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.pbStop.BackColor = System.Drawing.Color.Transparent;
-            this.pbStop.Image = global::WindowsSoftberyPlayer.Properties.Resources.stop;
+            this.pbStop.Image = global::Properties.Resources.stop;
             this.pbStop.Location = new System.Drawing.Point(96, 32);
             this.pbStop.Name = "pbStop";
             this.pbStop.Size = new System.Drawing.Size(40, 40);
@@ -286,7 +285,7 @@ namespace WindowsSoftberyPlayer.ControlBar
             // 
             this.pbPlay.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.pbPlay.BackColor = System.Drawing.Color.Transparent;
-            this.pbPlay.Image = global::WindowsSoftberyPlayer.Properties.Resources.play;
+            this.pbPlay.Image = global::Properties.Resources.play;
             this.pbPlay.Location = new System.Drawing.Point(50, 32);
             this.pbPlay.Name = "pbPlay";
             this.pbPlay.Size = new System.Drawing.Size(40, 40);
@@ -299,7 +298,7 @@ namespace WindowsSoftberyPlayer.ControlBar
             // 
             this.pbRewind.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.pbRewind.BackColor = System.Drawing.Color.Transparent;
-            this.pbRewind.Image = global::WindowsSoftberyPlayer.Properties.Resources.rewind;
+            this.pbRewind.Image = global::Properties.Resources.rewind;
             this.pbRewind.Location = new System.Drawing.Point(4, 32);
             this.pbRewind.Name = "pbRewind";
             this.pbRewind.Size = new System.Drawing.Size(40, 40);
