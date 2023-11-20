@@ -52,12 +52,6 @@
     <Compile Include="ControlBar\VideoControlBar.Designer.cs">
       <DependentUpon>VideoControlBar.cs</DependentUpon>
     </Compile>
-    <Compile Include="ControlBar\WMPControlsBar.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="ControlBar\WMPControlsBar.Designer.cs">
-      <DependentUpon>WMPControlsBar.cs</DependentUpon>
-    </Compile>
     <Compile Include="Filters\KeyPressFilter.cs" />
     <Compile Include="Filters\MouseMoveFilter.cs" />
     <Compile Include="Forms\FormLogs.cs">
@@ -78,16 +72,29 @@
     <Compile Include="Forms\FormSettings.Designer.cs">
       <DependentUpon>FormSettings.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\FormSubtiles.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\FormSubtiles.Designer.cs">
+      <DependentUpon>FormSubtiles.cs</DependentUpon>
+    </Compile>
     <Compile Include="Labels\LabelEventName.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Labels\LabelSubtiles.cs">
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Subtiles\Subtile.cs" />
     <EmbeddedResource Include="ControlBar\VideoControlBar.resx">
       <DependentUpon>VideoControlBar.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\FormMain.resx">
       <DependentUpon>FormMain.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FormSubtiles.resx">
+      <DependentUpon>FormSubtiles.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -148,6 +155,10 @@
     <ProjectReference Include="..\ColorSlider\ColorSlider.csproj">
       <Project>{d3ebc32a-efb0-4684-9124-6f777428150d}</Project>
       <Name>ColorSlider</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\WSPSubtile\WSPSubtile.csproj">
+      <Project>{4f9f5e9e-55fc-4c9f-8d04-f4fb5a97be68}</Project>
+      <Name>WSPSubtile</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

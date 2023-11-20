@@ -1,4 +1,4 @@
-// Version: 1.0.0.165
+// Version: 1.0.0.229
 namespace WindowsSoftberyPlayer.ControlBar
 {
     partial class VideoControlBar
@@ -50,6 +50,9 @@ namespace WindowsSoftberyPlayer.ControlBar
             this.labelCurrentTime = new System.Windows.Forms.Label();
             this.labelWidgetTime = new System.Windows.Forms.Label();
             this.labelRunedEvent = new System.Windows.Forms.Label();
+            this.labelSubtilesLine1 = new WindowsSoftberyPlayer.Labels.LabelSubtiles();
+            this.labelSubtilesLine2 = new WindowsSoftberyPlayer.Labels.LabelSubtiles();
+            this.labelSubtilesLine3 = new WindowsSoftberyPlayer.Labels.LabelSubtiles();
             ((System.ComponentModel.ISupportInitialize)(this.axWMP)).BeginInit();
             this.panelControl.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbSettings)).BeginInit();
@@ -367,12 +370,12 @@ namespace WindowsSoftberyPlayer.ControlBar
             this.labelWidgetTime.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.labelWidgetTime.ForeColor = System.Drawing.Color.White;
             this.labelWidgetTime.LiveSetting = System.Windows.Forms.Automation.AutomationLiveSetting.Assertive;
-            this.labelWidgetTime.Location = new System.Drawing.Point(991, 9);
+            this.labelWidgetTime.Location = new System.Drawing.Point(963, 9);
             this.labelWidgetTime.Name = "labelWidgetTime";
             this.labelWidgetTime.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.labelWidgetTime.Size = new System.Drawing.Size(65, 19);
+            this.labelWidgetTime.Size = new System.Drawing.Size(93, 19);
             this.labelWidgetTime.TabIndex = 37;
-            this.labelWidgetTime.Text = "00:00:00";
+            this.labelWidgetTime.Text = "00:00:00,000";
             this.labelWidgetTime.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // labelRunedEvent
@@ -391,10 +394,58 @@ namespace WindowsSoftberyPlayer.ControlBar
             this.labelRunedEvent.Text = "0";
             this.labelRunedEvent.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
+            // labelSubtilesLine1
+            // 
+            this.labelSubtilesLine1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.labelSubtilesLine1.AutoSize = true;
+            this.labelSubtilesLine1.BackColor = System.Drawing.Color.Black;
+            this.labelSubtilesLine1.Font = new System.Drawing.Font("Calibri", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.labelSubtilesLine1.ForeColor = System.Drawing.Color.White;
+            this.labelSubtilesLine1.Location = new System.Drawing.Point(482, 333);
+            this.labelSubtilesLine1.Name = "labelSubtilesLine1";
+            this.labelSubtilesLine1.Size = new System.Drawing.Size(133, 26);
+            this.labelSubtilesLine1.TabIndex = 39;
+            this.labelSubtilesLine1.Text = "labelSubtiles1";
+            this.labelSubtilesLine1.Transparency = 90;
+            // 
+            // labelSubtilesLine2
+            // 
+            this.labelSubtilesLine2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.labelSubtilesLine2.AutoSize = true;
+            this.labelSubtilesLine2.BackColor = System.Drawing.Color.Black;
+            this.labelSubtilesLine2.Font = new System.Drawing.Font("Calibri", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.labelSubtilesLine2.ForeColor = System.Drawing.Color.White;
+            this.labelSubtilesLine2.Location = new System.Drawing.Point(482, 359);
+            this.labelSubtilesLine2.Name = "labelSubtilesLine2";
+            this.labelSubtilesLine2.Size = new System.Drawing.Size(133, 26);
+            this.labelSubtilesLine2.TabIndex = 40;
+            this.labelSubtilesLine2.Text = "labelSubtiles1";
+            this.labelSubtilesLine2.Transparency = 90;
+            // 
+            // labelSubtilesLine3
+            // 
+            this.labelSubtilesLine3.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.labelSubtilesLine3.AutoSize = true;
+            this.labelSubtilesLine3.BackColor = System.Drawing.Color.Black;
+            this.labelSubtilesLine3.Font = new System.Drawing.Font("Calibri", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.labelSubtilesLine3.ForeColor = System.Drawing.Color.White;
+            this.labelSubtilesLine3.Location = new System.Drawing.Point(482, 385);
+            this.labelSubtilesLine3.Name = "labelSubtilesLine3";
+            this.labelSubtilesLine3.Size = new System.Drawing.Size(133, 26);
+            this.labelSubtilesLine3.TabIndex = 41;
+            this.labelSubtilesLine3.Text = "labelSubtiles1";
+            this.labelSubtilesLine3.Transparency = 90;
+            // 
             // VideoControlBar
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.labelSubtilesLine3);
+            this.Controls.Add(this.labelSubtilesLine2);
+            this.Controls.Add(this.labelSubtilesLine1);
             this.Controls.Add(this.labelRunedEvent);
             this.Controls.Add(this.labelWidgetTime);
             this.Controls.Add(this.panelControl);
@@ -441,5 +492,8 @@ namespace WindowsSoftberyPlayer.ControlBar
         private System.Windows.Forms.Label labelCurrentTime;
         private System.Windows.Forms.Label labelWidgetTime;
         private System.Windows.Forms.Label labelRunedEvent;
+        private Labels.LabelSubtiles labelSubtilesLine1;
+        private Labels.LabelSubtiles labelSubtilesLine2;
+        private Labels.LabelSubtiles labelSubtilesLine3;
     }
 }

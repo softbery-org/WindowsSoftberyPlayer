@@ -1,4 +1,4 @@
-// Version: 1.0.0.168
+// Version: 1.0.0.232
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -30,6 +30,7 @@ namespace WindowsSoftberyPlayer.Forms
             Application.AddMessageFilter(_keypressFilter);
 
             videoControlBar1.Owner = this;
+            ReadSubtile();
         }
 
         private void _keypressFilter_KeyPressed(object sender, KeyPressEventArgs e)
@@ -132,6 +133,12 @@ namespace WindowsSoftberyPlayer.Forms
         protected override void OnPaint(PaintEventArgs e)
         {
             base.OnPaint(e);
+        }
+
+        private void ReadSubtile()
+        {
+            var s = new Subtiles.Subtile("D:\\films\\Loki.S02E06.MULTi.720p.DSNP.WEB-DL.H264.DDP5.1.Atmos-Donnek.srt");
+            MessageBox.Show(s.SubtileDictionary.Count.ToString());
         }
     }
 }

@@ -1,4 +1,4 @@
-// Version: 1.0.0.164
+// Version: 1.0.0.228
 using AxWMPLib;
 using System;
 using System.Collections.Generic;
@@ -7,6 +7,7 @@ using System.Data;
 using System.Drawing;
 using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Reflection.Emit;
 using System.Runtime.InteropServices;
 using System.Text;
@@ -14,7 +15,9 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using WindowsSoftberyPlayer.Filters;
 using WindowsSoftberyPlayer.Forms;
+using WindowsSoftberyPlayer.Subtiles;
 using WMPLib;
+using WSPSubtile;
 using static System.Net.Mime.MediaTypeNames;
 
 namespace WindowsSoftberyPlayer.ControlBar
@@ -50,6 +53,8 @@ namespace WindowsSoftberyPlayer.ControlBar
         public string SubtilesFile { get; private set; }
         public bool Subtiles { get; set; } = false;
         public TimeWidget TimeWidgetValue { get; set; } = TimeWidget.Left;
+        private Dictionary<string,Sub> _sub;
+        private SubtileManager _menager;
 
         public VideoControlBar() : base()
         {
@@ -77,9 +82,27 @@ namespace WindowsSoftberyPlayer.ControlBar
 
             labelRunedEvent.Visible = false;
 
+            _sub = new Dictionary<string, Sub>();
+
             if (Owner == null)
                 Owner = this.ParentForm as FormMain;
+            subtilesManager();
+        }
 
+        private void subtilesManager()
+        {
+            var manager = new WSPSubtile.SubtileManager();
+            var sub = new WSPSubtile.Subtile();
+            //00:00:03,257 --> 00:00:04,001 Test lini 1
+            //00:00:06,001 --> 00:00:10,125 Test 6 sekund lini 1
+            //00:00:15,012 --> 00:00:17,414 Oni my wy to
+            //00:01:03,089 --> 00:01:07,189 Wy�wietla
+            manager.AddLinesContent("00:00:03,257", "00:00:04,001", new string[] { "Test lini 1" });
+            manager.AddLinesContent("00:00:06,001", "00:00:10,125", new string[] { "Test 6 sekund lini 1" });
+            manager.AddLinesContent("00:00:15,012", "00:00:17,414", new string[] { "Oni my wy to" });
+            manager.AddLinesContent("00:01:03,089", "00:01:07,189", new string[] { "Wy�wietla" });
+
+            _menager = manager;
         }
 
         private async Task drawEventName(string txt)
@@ -194,7 +217,8 @@ namespace WindowsSoftberyPlayer.ControlBar
 
                 var elapsed_time = $"{tse.Hours:00}:{tse.Minutes:00}:{tse.Seconds:00}";
                 var full_time = $"{ts.Hours:00}:{ts.Minutes:00}:{ts.Seconds:00}";
-                var left_time = $"{tsl.Hours:00}:{tsl.Minutes:00}:{tsl.Seconds:00}-";
+                var left_time = $"{tsl.Hours:00}:{tsl.Minutes:00}:{tsl.Seconds:00},{tsl.Milliseconds:000}-";
+                var sub_time = $"{tse.Hours:00}:{tse.Minutes:00}:{tse.Seconds:00},{tse.Milliseconds:000}";
 
                 this.Text = string.Format("{0}", _videoName)
                     + " : " +
@@ -205,6 +229,13 @@ namespace WindowsSoftberyPlayer.ControlBar
                 labelDurationTime.Text = full_time;
                 labelCurrentVolume.Text = Convert.ToInt32(_player.settings.volume).ToString();
                 labelVideoName.Text = _videoName;
+
+                var k = _menager.GetTimeFromString(sub_time);
+                this.ParentForm.Text = $"{k.Hours:00}:{k.Minutes:00}:{k.Seconds:00},{k.Milliseconds:000}";
+                if (_menager.SubtilesDictionary.ContainsKey(k))
+                {
+                    MessageBox.Show("Test");
+                }
 
                 if (WidgetTime)
                 {
@@ -226,6 +257,27 @@ namespace WindowsSoftberyPlayer.ControlBar
             }
         }
         #endregion
+
+        private void showSubtiles()
+        {
+            var current = GetTimeSpan(_player.Ctlcontrols.currentPosition);
+            if (_sub.Count>0)
+            {
+                foreach (var key in _sub.Keys)
+                {
+                    if (current.TotalSeconds>=ParseTimeSpan(key).TotalSeconds)
+                    {
+                        labelSubtilesLine1.Text = _sub[key]._end;
+                    }
+                }
+            }
+        }
+
+
+        private TimeSpan ParseTimeSpan(string time)
+        {
+            return TimeSpan.Parse(time);
+        }
 
         private TimeSpan GetTimeSpan(double val)
         {
@@ -316,9 +368,11 @@ namespace WindowsSoftberyPlayer.ControlBar
                     _timer.Enabled = true;
                     _maxTime = _player.currentMedia.duration;
                     _player.EndOfStream += _player_EndOfStream;
-                    if (File.Exists(dir+_videoName+".txt"))
+                    if (File.Exists(dir + _videoName + ".srt"))
                     {
-                        _subtilesFile = dir + _videoName + ".txt";
+                        _subtilesFile = dir + _videoName + ".srt";
+                        //var subtile = new Subtile(_subtilesFile);
+                        //_sub = subtile.GetSubStartTime();
                     }
                     await ShowEventLabel("Open file");
                     //Logger.Net48.Logger.Write(this, new Log() { LogType = LogType.Info, Message = $"Opening video file: {video_file}", SenderType = Logger.Net48.Logger.GetMethodName() });
@@ -340,14 +394,17 @@ namespace WindowsSoftberyPlayer.ControlBar
 
         private void pbSettings_Click(object sender, EventArgs e)
         {
-            Forms.FormSettings form = new Forms.FormSettings();
-            form.Show();
+            //Forms.FormSettings form = new Forms.FormSettings();
+            //form.Show();
+            Forms.FormSubtiles subtiles = new FormSubtiles();
+            subtiles.Show();
         }
         #endregion
 
         #region Dispose at end of stream
         private void _player_EndOfStream(object sender, _WMPOCXEvents_EndOfStreamEvent e)
         {
+            Clear();
             _player.Dispose();
         }
         #endregion
