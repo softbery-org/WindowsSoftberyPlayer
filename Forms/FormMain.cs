@@ -1,4 +1,4 @@
-// Version: 1.0.0.232
+// Version: 1.0.0.282
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -137,8 +137,7 @@ namespace WindowsSoftberyPlayer.Forms
 
         private void ReadSubtile()
         {
-            var s = new Subtiles.Subtile("D:\\films\\Loki.S02E06.MULTi.720p.DSNP.WEB-DL.H264.DDP5.1.Atmos-Donnek.srt");
-            MessageBox.Show(s.SubtileDictionary.Count.ToString());
+
         }
     }
 }

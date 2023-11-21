@@ -1,4 +1,4 @@
-// Version: 1.0.0.228
+// Version: 1.0.0.277
 using AxWMPLib;
 using System;
 using System.Collections.Generic;
@@ -54,7 +54,8 @@ namespace WindowsSoftberyPlayer.ControlBar
         public bool Subtiles { get; set; } = false;
         public TimeWidget TimeWidgetValue { get; set; } = TimeWidget.Left;
         private Dictionary<string,Sub> _sub;
-        private SubtileManager _menager;
+        private SubtileManager _manager;
+        private List<SubtileSrt> _list = new List<SubtileSrt>();
 
         public VideoControlBar() : base()
         {
@@ -86,23 +87,24 @@ namespace WindowsSoftberyPlayer.ControlBar
 
             if (Owner == null)
                 Owner = this.ParentForm as FormMain;
-            subtilesManager();
+
+            //subtilesManager();
         }
 
         private void subtilesManager()
         {
             var manager = new WSPSubtile.SubtileManager();
-            var sub = new WSPSubtile.Subtile();
+            /*var sub = new WSPSubtile.Subtile();
             //00:00:03,257 --> 00:00:04,001 Test lini 1
             //00:00:06,001 --> 00:00:10,125 Test 6 sekund lini 1
             //00:00:15,012 --> 00:00:17,414 Oni my wy to
-            //00:01:03,089 --> 00:01:07,189 Wy�wietla
-            manager.AddLinesContent("00:00:03,257", "00:00:04,001", new string[] { "Test lini 1" });
-            manager.AddLinesContent("00:00:06,001", "00:00:10,125", new string[] { "Test 6 sekund lini 1" });
-            manager.AddLinesContent("00:00:15,012", "00:00:17,414", new string[] { "Oni my wy to" });
-            manager.AddLinesContent("00:01:03,089", "00:01:07,189", new string[] { "Wy�wietla" });
-
-            _menager = manager;
+            //00:01:03,089 --> 00:01:07,189 Wyświetla
+            manager.AddLinesContent(_menager.GetTimeFromString("00:00:03,257"), _menager.GetTimeFromString("00:00:04,001"), new string[] { "Test lini 1" });
+            manager.AddLinesContent(_menager.GetTimeFromString("00:00:06,001"), _menager.GetTimeFromString("00:00:10,125"), new string[] { "Test 6 sekund lini 1" });
+            manager.AddLinesContent(_menager.GetTimeFromString("00:00:15,012"), _menager.GetTimeFromString("00:00:17,414"), new string[] { "Oni my wy to" });
+            manager.AddLinesContent(_menager.GetTimeFromString("00:01:03,089"), _menager.GetTimeFromString("00:01:07,189"), new string[] { "Wyświetla" });
+            */
+            _manager = manager;
         }
 
         private async Task drawEventName(string txt)
@@ -200,6 +202,7 @@ namespace WindowsSoftberyPlayer.ControlBar
         #endregion
 
         #region Timer
+        private int _subint = 0;
         private void _timer_Tick(object sender, EventArgs e)
         {
             if (_player != null && _player.URL!="")
@@ -218,7 +221,7 @@ namespace WindowsSoftberyPlayer.ControlBar
                 var elapsed_time = $"{tse.Hours:00}:{tse.Minutes:00}:{tse.Seconds:00}";
                 var full_time = $"{ts.Hours:00}:{ts.Minutes:00}:{ts.Seconds:00}";
                 var left_time = $"{tsl.Hours:00}:{tsl.Minutes:00}:{tsl.Seconds:00},{tsl.Milliseconds:000}-";
-                var sub_time = $"{tse.Hours:00}:{tse.Minutes:00}:{tse.Seconds:00},{tse.Milliseconds:000}";
+                var sub_time = $"{tse.Hours:00}:{tse.Minutes:00}:{tse.Seconds:00}";
 
                 this.Text = string.Format("{0}", _videoName)
                     + " : " +
@@ -230,11 +233,27 @@ namespace WindowsSoftberyPlayer.ControlBar
                 labelCurrentVolume.Text = Convert.ToInt32(_player.settings.volume).ToString();
                 labelVideoName.Text = _videoName;
 
-                var k = _menager.GetTimeFromString(sub_time);
-                this.ParentForm.Text = $"{k.Hours:00}:{k.Minutes:00}:{k.Seconds:00},{k.Milliseconds:000}";
-                if (_menager.SubtilesDictionary.ContainsKey(k))
+                if (_subint < _manager.Subtiles.Count)
                 {
-                    MessageBox.Show("Test");
+                    var st = _manager.GetTimeFromString(_manager.Subtiles[_subint].StartTime);
+                    var et = _manager.GetTimeFromString(_manager.Subtiles[_subint].EndTime);
+
+                    labelSubtilesLine1.Location = new Point((Width / 2) - (labelSubtilesLine1.Width / 2), (Height - (3 * labelSubtilesLine1.Height)));
+                    labelSubtilesLine2.Location = new Point((Width / 2) - (labelSubtilesLine1.Width / 2), (Height - (2 * labelSubtilesLine1.Height)));
+
+                    if (st.Seconds == _manager.GetTimeFromString(sub_time).Seconds)
+                    {
+                        labelSubtilesLine1.Visible = true;
+                        labelSubtilesLine2.Visible = true;
+                        labelSubtilesLine1.Text = _manager.Subtiles[_subint].TextI;
+                        labelSubtilesLine2.Text = _manager.Subtiles[_subint].TextII;
+                        _subint++;
+                    }
+                    if (et.Seconds == _manager.GetTimeFromString(sub_time).Seconds)
+                    {
+                        labelSubtilesLine1.Visible = false;
+                        labelSubtilesLine2.Visible = false;
+                    }
                 }
 
                 if (WidgetTime)
@@ -261,18 +280,7 @@ namespace WindowsSoftberyPlayer.ControlBar
         private void showSubtiles()
         {
             var current = GetTimeSpan(_player.Ctlcontrols.currentPosition);
-            if (_sub.Count>0)
-            {
-                foreach (var key in _sub.Keys)
-                {
-                    if (current.TotalSeconds>=ParseTimeSpan(key).TotalSeconds)
-                    {
-                        labelSubtilesLine1.Text = _sub[key]._end;
-                    }
-                }
-            }
         }
-
 
         private TimeSpan ParseTimeSpan(string time)
         {
@@ -368,11 +376,13 @@ namespace WindowsSoftberyPlayer.ControlBar
                     _timer.Enabled = true;
                     _maxTime = _player.currentMedia.duration;
                     _player.EndOfStream += _player_EndOfStream;
-                    if (File.Exists(dir + _videoName + ".srt"))
+                    
+                    if (File.Exists(_videoName + ".srt"))
                     {
-                        _subtilesFile = dir + _videoName + ".srt";
-                        //var subtile = new Subtile(_subtilesFile);
-                        //_sub = subtile.GetSubStartTime();
+                        _subtilesFile = _videoName + ".srt";
+                        var manager = new SubtileManager();
+                        manager.ReadFromFile(_subtilesFile);
+                        _manager = manager;
                     }
                     await ShowEventLabel("Open file");
                     //Logger.Net48.Logger.Write(this, new Log() { LogType = LogType.Info, Message = $"Opening video file: {video_file}", SenderType = Logger.Net48.Logger.GetMethodName() });
