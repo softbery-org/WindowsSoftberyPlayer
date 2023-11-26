@@ -1,4 +1,4 @@
-// Version: 1.0.0.277
+// Version: 1.0.0.335
 using AxWMPLib;
 using System;
 using System.Collections.Generic;
@@ -15,10 +15,12 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using WindowsSoftberyPlayer.Filters;
 using WindowsSoftberyPlayer.Forms;
+using WindowsSoftberyPlayer.Labels;
 using WindowsSoftberyPlayer.Subtiles;
 using WMPLib;
 using WSPSubtile;
 using static System.Net.Mime.MediaTypeNames;
+using static WindowsSoftberyPlayer.ControlBar.VideoControlBar;
 
 namespace WindowsSoftberyPlayer.ControlBar
 {
@@ -45,22 +47,43 @@ namespace WindowsSoftberyPlayer.ControlBar
         public object Owner { get; set; } = null;
         public bool WidgetTime { get; set; } = true;
         private string _subtilesFile;
-
+        public enum TextLocationType
+        {
+            LeftTop,
+            RightTop,
+            CenterTop,
+            LeftMiddle,
+            RightMiddle,
+            CenterMiddle,
+            LeftBottom,
+            RightBottom,
+            CenterBottom
+        }
+        public delegate void dlgTextLocation(object sender, TextLocationEventArgs e);
+        public event dlgTextLocation ShowTextLocation;
+        public event dlgTextLocation ChangeTextLocation;
         /// <summary>
         /// Default 10 sec
         /// </summary>
         public int SeekTime { get; set; } = 10;
         public string SubtilesFile { get; private set; }
-        public bool Subtiles { get; set; } = false;
+        public bool ShowSubtiles { get; set; } = false;
         public TimeWidget TimeWidgetValue { get; set; } = TimeWidget.Left;
-        private Dictionary<string,Sub> _sub;
-        private SubtileManager _manager;
+        private Dictionary<string, Subtiles.Subtile> _sub;
+        private Subtiles.SubtileManager _manager = new Subtiles.SubtileManager();
         private List<SubtileSrt> _list = new List<SubtileSrt>();
+
+        private void OnShowTextLocation(object sender, TextLocationEventArgs e)
+        {
+            if (ShowTextLocation!=null)
+            {
+                ShowTextLocation.Invoke(this, e);
+            }
+        }
 
         public VideoControlBar() : base()
         {
             InitializeComponent();
-
             _mouseMoveFilter = new Filters.MouseMoveFilter();
             _mouseMoveFilter.MouseMove += _mouseMoveFilter_OnMouseMove;
             _mouseMoveFilter.MouseNotMove += _mouseMoveFilter_OnMouseNotMove;
@@ -83,17 +106,19 @@ namespace WindowsSoftberyPlayer.ControlBar
 
             labelRunedEvent.Visible = false;
 
-            _sub = new Dictionary<string, Sub>();
+            _sub = new Dictionary<string, Subtiles.Subtile>();
 
             if (Owner == null)
                 Owner = this.ParentForm as FormMain;
 
+            panelControl.BringToFront();
+            Invalidate();
             //subtilesManager();
         }
 
         private void subtilesManager()
         {
-            var manager = new WSPSubtile.SubtileManager();
+            //var manager = new WSPSubtile.SubtileManager();
             /*var sub = new WSPSubtile.Subtile();
             //00:00:03,257 --> 00:00:04,001 Test lini 1
             //00:00:06,001 --> 00:00:10,125 Test 6 sekund lini 1
@@ -104,8 +129,38 @@ namespace WindowsSoftberyPlayer.ControlBar
             manager.AddLinesContent(_menager.GetTimeFromString("00:00:15,012"), _menager.GetTimeFromString("00:00:17,414"), new string[] { "Oni my wy to" });
             manager.AddLinesContent(_menager.GetTimeFromString("00:01:03,089"), _menager.GetTimeFromString("00:01:07,189"), new string[] { "Wyświetla" });
             */
-            _manager = manager;
+            //_manager = manager;
         }
+
+        /*private async Task ShowSubtiles()
+        {
+            await Task.Run(async()=>
+            {
+                if (_player != null)
+                {
+                    var current = _player.Ctlcontrols.currentPosition;
+                    var st = _manager.GetTimeFromString(_manager.Subtiles[_subint].StartTime);
+                    var et = _manager.GetTimeFromString(_manager.Subtiles[_subint].EndTime);
+
+
+                    labelSubtilesLine1.Invoke((MethodInvoker)(() =>
+                    {
+                        for (int i = 0; i < _manager.Subtiles.Count; i++)
+                        {
+                            if (_manager.GetTimeFromString(_manager.Subtiles[i].StartTime).Seconds == current)
+                            {
+                                labelSubtilesLine1.Visible = true;
+                                labelSubtilesLine1.Text = _manager.Subtiles[i].TextI;
+                            }
+                            if (_manager.GetTimeFromString(_manager.Subtiles[i].EndTime).Seconds == current)
+                            {
+                                labelSubtilesLine1.Visible = false;
+                            }
+                        }
+                    }));
+                }
+            });
+        }*/
 
         private async Task drawEventName(string txt)
         {
@@ -205,9 +260,8 @@ namespace WindowsSoftberyPlayer.ControlBar
         private int _subint = 0;
         private void _timer_Tick(object sender, EventArgs e)
         {
-            if (_player != null && _player.URL!="")
+            if (_player != null)
             {
-                
                 _maxTime = _player.currentMedia.duration;
                 _currentTime = _player.Ctlcontrols.currentPosition;
 
@@ -221,6 +275,7 @@ namespace WindowsSoftberyPlayer.ControlBar
                 var elapsed_time = $"{tse.Hours:00}:{tse.Minutes:00}:{tse.Seconds:00}";
                 var full_time = $"{ts.Hours:00}:{ts.Minutes:00}:{ts.Seconds:00}";
                 var left_time = $"{tsl.Hours:00}:{tsl.Minutes:00}:{tsl.Seconds:00},{tsl.Milliseconds:000}-";
+
                 var sub_time = $"{tse.Hours:00}:{tse.Minutes:00}:{tse.Seconds:00}";
 
                 this.Text = string.Format("{0}", _videoName)
@@ -233,7 +288,17 @@ namespace WindowsSoftberyPlayer.ControlBar
                 labelCurrentVolume.Text = Convert.ToInt32(_player.settings.volume).ToString();
                 labelVideoName.Text = _videoName;
 
-                if (_subint < _manager.Subtiles.Count)
+
+                foreach (var item in _manager.GetSubtiles())
+                {
+                    if (sub_time == item.Key)
+                    {
+                        labelSubtilesLine1.Text = item.Value.Text1;
+                        labelSubtilesLine2.Text = item.Value.Text2;
+                    }
+                }
+                
+                /*if (_subint < _manager.Subtiles.Count)
                 {
                     var st = _manager.GetTimeFromString(_manager.Subtiles[_subint].StartTime);
                     var et = _manager.GetTimeFromString(_manager.Subtiles[_subint].EndTime);
@@ -254,7 +319,9 @@ namespace WindowsSoftberyPlayer.ControlBar
                         labelSubtilesLine1.Visible = false;
                         labelSubtilesLine2.Visible = false;
                     }
-                }
+                }*/
+                
+                
 
                 if (WidgetTime)
                 {
@@ -380,9 +447,11 @@ namespace WindowsSoftberyPlayer.ControlBar
                     if (File.Exists(_videoName + ".srt"))
                     {
                         _subtilesFile = _videoName + ".srt";
-                        var manager = new SubtileManager();
-                        manager.ReadFromFile(_subtilesFile);
-                        _manager = manager;
+                        //var manager = new WSPSubtile.SubtileManager();
+                        var sub = new Subtiles.SubtileManager(_subtilesFile);
+                        MessageBox.Show(sub.Count.ToString());
+                        //manager.ReadFromFile(_subtilesFile);
+                        _manager = sub;
                     }
                     await ShowEventLabel("Open file");
                     //Logger.Net48.Logger.Write(this, new Log() { LogType = LogType.Info, Message = $"Opening video file: {video_file}", SenderType = Logger.Net48.Logger.GetMethodName() });
@@ -404,10 +473,10 @@ namespace WindowsSoftberyPlayer.ControlBar
 
         private void pbSettings_Click(object sender, EventArgs e)
         {
-            //Forms.FormSettings form = new Forms.FormSettings();
-            //form.Show();
-            Forms.FormSubtiles subtiles = new FormSubtiles();
-            subtiles.Show();
+            Forms.FormSettings form = new Forms.FormSettings();
+            form.ShowDialog();
+            //Forms.FormSubtiles subtiles = new FormSubtiles();
+            //subtiles.Show();
         }
         #endregion
 
@@ -416,6 +485,8 @@ namespace WindowsSoftberyPlayer.ControlBar
         {
             Clear();
             _player.Dispose();
+            colorSliderTrackBar.Minimum = 0;
+            colorSliderTrackBar.Maximum = (int)_player.currentMedia.duration;
         }
         #endregion
 
@@ -521,6 +592,46 @@ namespace WindowsSoftberyPlayer.ControlBar
 
         }
         #endregion
+
+        private void labelSubtilesLine1_TextChanged(object sender, EventArgs e)
+        {
+            labelSubtilesLine1.Location = new Point((Width / 2) - (labelSubtilesLine1.Width / 2), Height - ((4 * labelSubtilesLine1.Height) + labelSubtilesLine1.Height));
+        }
+
+        private void labelSubtilesLine2_TextChanged(object sender, EventArgs e)
+        {
+            labelSubtilesLine2.Location = new Point((Width / 2) - (labelSubtilesLine2.Width / 2), Height - ((2 * labelSubtilesLine1.Height) + labelSubtilesLine1.Height));
+        }
+        private void labelSubtilesLine3_TextChanged(object sender, EventArgs e)
+        {
+            labelSubtilesLine3.Location = new Point((Width / 2) - (labelSubtilesLine3.Width / 2), Height - ((0 * labelSubtilesLine3.Height) + labelSubtilesLine3.Height));
+        }
+
+        private void pbSubtilesOnOff_Click(object sender, EventArgs e)
+        {
+            if (!ShowSubtiles)
+            {
+                labelSubtilesLine1.Visible = true;
+                labelSubtilesLine2.Visible = true;
+                labelSubtilesLine3.Visible = true;
+                ShowSubtiles = true;
+                Refresh();
+            }
+            else
+            {
+                ShowSubtiles = false;
+                labelSubtilesLine1.Visible = false;
+                labelSubtilesLine2.Visible = false;
+                labelSubtilesLine3.Visible = false;
+                Refresh();
+            }
+        }
+    }
+
+    public class TextLocationEventArgs : EventArgs
+    {
+        public Point Point { get; set; }
+        public TextLocationType Position { get; set; }
     }
 
     [Flags]

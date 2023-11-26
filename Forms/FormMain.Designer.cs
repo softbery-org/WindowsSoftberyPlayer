@@ -1,4 +1,4 @@
-// Version: 1.0.0.282
+// Version: 1.0.0.340
 namespace WindowsSoftberyPlayer.Forms
 {
     partial class FormMain
@@ -39,8 +39,8 @@ namespace WindowsSoftberyPlayer.Forms
             this.videoControlBar1.Name = "videoControlBar1";
             this.videoControlBar1.Owner = null;
             this.videoControlBar1.SeekTime = 10;
-            this.videoControlBar1.Size = new System.Drawing.Size(787, 497);
-            this.videoControlBar1.Subtiles = false;
+            this.videoControlBar1.ShowSubtiles = false;
+            this.videoControlBar1.Size = new System.Drawing.Size(1043, 497);
             this.videoControlBar1.TabIndex = 0;
             this.videoControlBar1.TimeWidgetValue = WindowsSoftberyPlayer.ControlBar.TimeWidget.Left;
             this.videoControlBar1.WidgetTime = true;
@@ -49,7 +49,7 @@ namespace WindowsSoftberyPlayer.Forms
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(787, 497);
+            this.ClientSize = new System.Drawing.Size(1043, 497);
             this.Controls.Add(this.videoControlBar1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Name = "FormMain";
