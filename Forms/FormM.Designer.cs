@@ -1,7 +1,7 @@
-// Version: 1.0.0.389
+// Version: 1.0.0.36
 namespace WindowsSoftberyPlayer.Forms
 {
-    partial class FormLogs
+    partial class FormM
     {
         /// <summary>
         /// Required designer variable.
@@ -32,7 +32,7 @@ namespace WindowsSoftberyPlayer.Forms
             this.components = new System.ComponentModel.Container();
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
-            this.Text = "FormLogs";
+            this.Text = "FormM";
         }
 
         #endregion

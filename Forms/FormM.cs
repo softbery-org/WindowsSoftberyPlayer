@@ -1,4 +1,4 @@
-// Version: 1.0.0.389
+// Version: 1.0.0.36
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -11,9 +11,9 @@ using System.Windows.Forms;
 
 namespace WindowsSoftberyPlayer.Forms
 {
-    public partial class FormLogs : Form
+    public partial class FormM : Form
     {
-        public FormLogs()
+        public FormM()
         {
             InitializeComponent();
         }

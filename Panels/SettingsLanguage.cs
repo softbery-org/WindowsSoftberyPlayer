@@ -1,4 +1,4 @@
-// Version: 1.0.0.389
+// Version: 1.0.0.33
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -9,11 +9,11 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace WindowsSoftberyPlayer.Forms
+namespace WindowsSoftberyPlayer.Panels
 {
-    public partial class FormLogs : Form
+    public partial class SettingsLanguage : UserControl
     {
-        public FormLogs()
+        public SettingsLanguage()
         {
             InitializeComponent();
         }

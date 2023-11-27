@@ -1,9 +1,13 @@
-// Version: 1.0.0.344
+// Version: 1.0.0.393
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using IniParser;
+using IniParser.Model;
 
 namespace WindowsSoftberyPlayer
 {
@@ -13,11 +17,84 @@ namespace WindowsSoftberyPlayer
         /// Główny punkt wejścia dla aplikacji.
         /// </summary>
         [STAThread]
-        static void Main()
+        static void Main(string[] args)
         {
+            // Read config
+            Config.Read();
+            //IniConfig.Configuration.Read(args);
+            // Application
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new Forms.FormMain());
+        }
+
+        
+    }
+
+    public static class Config
+    {
+        private static string _directory = AppDomain.CurrentDomain.BaseDirectory;
+        /// <summary>
+        /// Ini configuration
+        /// </summary>
+        public static IniData Parameters { get; private set; }
+
+        /// <summary>
+        /// Read config file - 'config.ini'
+        /// </summary>
+        /// <param name="directory">Path to directory where ini file exist</param>
+        public static void Read()
+        {
+            var config = new FileInfo(_directory + "config.ini");
+            if (config.Exists)
+            {
+                var ini = new IniParser.FileIniDataParser();
+                Parameters = ini.ReadFile(config.FullName);
+            }
+            else
+            {
+                createConfig(config);
+                Read();
+            }
+        }
+
+        public static void Write()
+        {
+            var config = new FileInfo(_directory + "config.ini");
+            var ini = new IniParser.FileIniDataParser();
+            Parameters = ini.Parser.Parse(config.FullName);
+        }
+
+        static void createConfig(FileInfo file)
+        {
+            try
+            {
+                // Create a new file     
+                using (FileStream fs = file.Create())
+                {
+                    Byte[] application = new UTF8Encoding(true).GetBytes($"[Player]{Environment.NewLine}");
+                    fs.Write(application, 0, application.Length);
+                    Byte[] lang = new UTF8Encoding(true).GetBytes($"Language=en_EN{Environment.NewLine}");
+                    fs.Write(lang, 0, lang.Length);
+                    Byte[] control_template = new UTF8Encoding(true).GetBytes($"ControlTemplate=Default{Environment.NewLine}");
+                    fs.Write(control_template, 0, control_template.Length);
+                    fs.Close();
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Nie mogę utworzyć pliku z konfiguracją aplikacji!{Environment.NewLine}[{ex.HResult}]: {ex.Message}");
+            }
+        }
+
+        static void mergeFile(string directory)
+        {
+            var config = new FileInfo(directory + "config.ini");
+            var parser = new IniParser.Parser.IniDataParser();
+
+            IniData player = parser.Parse(File.ReadAllText(directory + "config.ini"));
+            IniData user = parser.Parse(File.ReadAllText("user_config.ini"));
+            player.Merge(user);
         }
     }
 }

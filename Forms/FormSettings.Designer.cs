@@ -1,4 +1,7 @@
-// Version: 1.0.0.340
+// Version: 1.0.0.389
+using System.Reflection;
+using System.Resources;
+
 namespace WindowsSoftberyPlayer.Forms
 {
     partial class FormSettings
@@ -29,18 +32,21 @@ namespace WindowsSoftberyPlayer.Forms
         /// </summary>
         private void InitializeComponent()
         {
-            this.listBox1 = new System.Windows.Forms.ListBox();
+            this.listBoxOptions = new System.Windows.Forms.ListBox();
             this.btnSave = new System.Windows.Forms.Button();
             this.labelOptions = new System.Windows.Forms.Label();
+            this.panelSettings = new System.Windows.Forms.Panel();
+            this.btnCancel = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
-            // listBox1
+            // listBoxOptions
             // 
-            this.listBox1.FormattingEnabled = true;
-            this.listBox1.Location = new System.Drawing.Point(12, 25);
-            this.listBox1.Name = "listBox1";
-            this.listBox1.Size = new System.Drawing.Size(120, 381);
-            this.listBox1.TabIndex = 0;
+            this.listBoxOptions.FormattingEnabled = true;
+            this.listBoxOptions.Location = new System.Drawing.Point(12, 25);
+            this.listBoxOptions.Name = "listBoxOptions";
+            this.listBoxOptions.Size = new System.Drawing.Size(120, 381);
+            this.listBoxOptions.TabIndex = 0;
+            this.listBoxOptions.SelectedIndexChanged += new System.EventHandler(this.listBoxOptions_SelectedIndexChanged);
             // 
             // btnSave
             // 
@@ -60,16 +66,34 @@ namespace WindowsSoftberyPlayer.Forms
             this.labelOptions.TabIndex = 2;
             this.labelOptions.Text = "Options:";
             // 
+            // panelSettings
+            // 
+            this.panelSettings.Location = new System.Drawing.Point(138, 9);
+            this.panelSettings.Name = "panelSettings";
+            this.panelSettings.Size = new System.Drawing.Size(650, 400);
+            this.panelSettings.TabIndex = 3;
+            // 
+            // btnCancel
+            // 
+            this.btnCancel.Location = new System.Drawing.Point(632, 415);
+            this.btnCancel.Name = "btnCancel";
+            this.btnCancel.Size = new System.Drawing.Size(75, 23);
+            this.btnCancel.TabIndex = 4;
+            this.btnCancel.Text = "Cancel";
+            this.btnCancel.UseVisualStyleBackColor = true;
+            // 
             // FormSettings
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.btnCancel);
+            this.Controls.Add(this.panelSettings);
             this.Controls.Add(this.labelOptions);
             this.Controls.Add(this.btnSave);
-            this.Controls.Add(this.listBox1);
+            this.Controls.Add(this.listBoxOptions);
             this.Name = "FormSettings";
-            this.Text = "FormSettings";
+            this.Text = "Options:";
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -77,8 +101,10 @@ namespace WindowsSoftberyPlayer.Forms
 
         #endregion
 
-        private System.Windows.Forms.ListBox listBox1;
+        private System.Windows.Forms.ListBox listBoxOptions;
         private System.Windows.Forms.Button btnSave;
         private System.Windows.Forms.Label labelOptions;
+        private System.Windows.Forms.Panel panelSettings;
+        private System.Windows.Forms.Button btnCancel;
     }
 }

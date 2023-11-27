@@ -1,13 +1,16 @@
-// Version: 1.0.0.340
+// Version: 1.0.0.389
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Reflection;
+using System.Resources;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Translator;
 using WindowsSoftberyPlayer.ControlBar;
 using WindowsSoftberyPlayer.Filters;
 
@@ -15,19 +18,38 @@ namespace WindowsSoftberyPlayer.Forms
 {
     public partial class FormMain : Form
     {
-        //public delegate void delegateFullScreen(object sender, FullscreenEventArgs e);
         private const int WM_KEYDOWN = 0x0100;
         public delegate void delegateFullscreen(object sender, EventArgs e);
         public event delegateFullscreen OnFullScreen;
         private KeyPressFilter _keypressFilter;
         public bool isFullscreen { get; private set; } = false;
+
+        /// <summary>
+        /// Translation
+        /// </summary>
+        /// <example>
+        /// translation.GetString("name");
+        /// </example>
+        private static ResourceManager _translation = new ResourceManager($"WindowsSoftberyPlayer.Languages.{Config.Parameters["Player"]["Language"]}", Assembly.GetExecutingAssembly());
+
         public FormMain()
         {
             InitializeComponent();
-
+            
             _keypressFilter = new KeyPressFilter();
             _keypressFilter.KeyPressed += _keypressFilter_KeyPressed; ;
             Application.AddMessageFilter(_keypressFilter);
+
+            /*var l = new Translator.Language();
+            var s = "";
+            foreach (var lang in l.LangList)
+            {
+                var la = lang.Lang().GetType();
+
+                s += la.ToString() + Environment.NewLine;//la.ToString() + Environment.NewLine;
+            }
+
+            MessageBox.Show(s);*/
 
             videoControlBar1.Owner = this;
             ReadSubtile();

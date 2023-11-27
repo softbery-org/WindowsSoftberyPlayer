@@ -1,4 +1,4 @@
-// Version: 1.0.0.335
+// Version: 1.0.0.384
 using AxWMPLib;
 using System;
 using System.Collections.Generic;
@@ -9,6 +9,7 @@ using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Reflection.Emit;
+using System.Resources;
 using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
@@ -26,6 +27,14 @@ namespace WindowsSoftberyPlayer.ControlBar
 {
     public partial class VideoControlBar : UserControl
     {
+        /// <summary>
+        /// Translation
+        /// </summary>
+        /// <example>
+        /// translation.GetString("name");
+        /// </example>
+        //private static ResourceManager translation = new ResourceManager($"WindowsSoftberyPlayer.Languages.{Config.Parameters["Player"]["Language"]}", Assembly.GetExecutingAssembly());
+
         private bool _fullscreen = false;
         private int _volume = 0;
         private bool _muted = false;
@@ -293,8 +302,18 @@ namespace WindowsSoftberyPlayer.ControlBar
                 {
                     if (sub_time == item.Key)
                     {
-                        labelSubtilesLine1.Text = item.Value.Text1;
-                        labelSubtilesLine2.Text = item.Value.Text2;
+                        if (item.Value.Text1!="")
+                            labelSubtilesLine1.Text = item.Value.Text1;
+                        if (item.Value.Text2 != "")
+                            labelSubtilesLine2.Text = item.Value.Text2;
+                        if (item.Value.Text3 != "")
+                            labelSubtilesLine3.Text = item.Value.Text3;
+                    }
+                    if (sub_time == item.Value.EndTime)
+                    {
+                        labelSubtilesLine1.Text = "";
+                        labelSubtilesLine2.Text = "";
+                        labelSubtilesLine3.Text = "";
                     }
                 }
                 
