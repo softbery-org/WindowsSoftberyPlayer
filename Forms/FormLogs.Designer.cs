@@ -1,4 +1,4 @@
-// Version: 1.0.0.495
+// Version: 1.0.0.501
 namespace WindowsSoftberyPlayer.Forms
 {
     partial class FormLogs

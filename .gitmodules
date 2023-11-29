@@ -1,0 +1,9 @@
+[submodule "Translator"]
+	path = Translator
+	url = git@github.com:softbery-org/WindowsSoftberyPlayer_Translate.git
+[submodule "English"]
+	path = English
+	url = git@github.com:softbery-org/WindowsSoftberyPlayer_Language_English.git
+[submodule "Polski"]
+	path = Polski
+	url = git@github.com:softbery-org/WindowsSoftberyPlayer_Language_Polski.git

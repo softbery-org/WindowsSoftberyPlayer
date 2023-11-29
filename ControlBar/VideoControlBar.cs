@@ -1,4 +1,4 @@
-// Version: 1.0.0.489
+// Version: 1.0.0.495
 using AxWMPLib;
 using System;
 using System.Collections.Generic;
@@ -149,7 +149,7 @@ namespace WindowsSoftberyPlayer.ControlBar
             SettingsLanguage.OnLanguageChange += RefreshControl;
             labelRunedEvent.Visible = false;
             ShowEventLabel += drawEventName;
-            ShowEventLabel(Language.Translation.videoControlBar_startTxt);
+            
             translate();
             showHideSubtiles();
             
