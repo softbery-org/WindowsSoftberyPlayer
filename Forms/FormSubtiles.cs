@@ -1,4 +1,4 @@
-// Version: 1.0.0.169
+// Version: 1.0.0.217
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -14,8 +14,6 @@ namespace WindowsSoftberyPlayer.Forms
 {
     public partial class FormSubtiles : Form
     {
-        private SubtileManager _maneger;
-        
         public FormSubtiles()
         {
             InitializeComponent();
@@ -26,7 +24,7 @@ namespace WindowsSoftberyPlayer.Forms
             //00:00:06,001 --> 00:00:10,125 Test 6 sekund lini 1
             //00:00:15,012 --> 00:00:17,414 Oni my wy to
             //00:01:03,089 --> 00:01:07,189 Wyświetla
-            manager.AddLinesContent("00:00:03,257", "00:00:04,001", new string[] { "Test lini 1" });
+            /*manager.AddLinesContent("00:00:03,257", "00:00:04,001", new string[] { "Test lini 1" });
             manager.AddLinesContent("00:00:06,001", "00:00:10,125", new string[] { "Test 6 sekund lini 1" });
             manager.AddLinesContent("00:00:15,012", "00:00:17,414", new string[] { "Oni my wy to" });
             manager.AddLinesContent("00:01:03,089", "00:01:07,189", new string[] { "Wyświetla" });
@@ -37,14 +35,14 @@ namespace WindowsSoftberyPlayer.Forms
                 listBoxEndTime.Items.Add(item.Value.VisibleDuration);
             }
 
-            _maneger = manager;
+            _maneger = manager;*/
         }
 
         private void listBoxStartTime_SelectedIndexChanged(object sender, EventArgs e)
         {
             var index = listBoxStartTime.SelectedIndex;
             listBoxEndTime.SelectedIndex = index;
-            richTextBoxLineI.Text = _maneger.GetLinesContent(listBoxStartTime.Items[index].ToString()).LineContent[0].ToString();
+            //richTextBoxLineI.Text = _maneger.GetLinesContent(listBoxStartTime.Items[index].ToString()).LineContent[0].ToString();
         }
     }
 }

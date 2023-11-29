@@ -1,4 +1,4 @@
-// Version: 1.0.0.384
+// Version: 1.0.0.432
 using AxWMPLib;
 using System;
 using System.Collections.Generic;
@@ -17,7 +17,6 @@ using System.Windows.Forms;
 using WindowsSoftberyPlayer.Filters;
 using WindowsSoftberyPlayer.Forms;
 using WindowsSoftberyPlayer.Labels;
-using WindowsSoftberyPlayer.Subtiles;
 using WMPLib;
 using WSPSubtile;
 using static System.Net.Mime.MediaTypeNames;
@@ -71,6 +70,8 @@ namespace WindowsSoftberyPlayer.ControlBar
         public delegate void dlgTextLocation(object sender, TextLocationEventArgs e);
         public event dlgTextLocation ShowTextLocation;
         public event dlgTextLocation ChangeTextLocation;
+        public int Opacity { get; set; } = 100;
+        public Color OpacityColor { get; set; }
         /// <summary>
         /// Default 10 sec
         /// </summary>
@@ -78,9 +79,9 @@ namespace WindowsSoftberyPlayer.ControlBar
         public string SubtilesFile { get; private set; }
         public bool ShowSubtiles { get; set; } = false;
         public TimeWidget TimeWidgetValue { get; set; } = TimeWidget.Left;
-        private Dictionary<string, Subtiles.Subtile> _sub;
-        private Subtiles.SubtileManager _manager = new Subtiles.SubtileManager();
-        private List<SubtileSrt> _list = new List<SubtileSrt>();
+        private Dictionary<string, Subtile> _sub;
+        private SubtileManager _manager = new SubtileManager();
+        //private List<SubtileSrt> _list = new List<SubtileSrt>();
 
         private void OnShowTextLocation(object sender, TextLocationEventArgs e)
         {
@@ -101,7 +102,7 @@ namespace WindowsSoftberyPlayer.ControlBar
             _keypressFilter = new KeyPressFilter();
             _keypressFilter.KeyPressed += _keypressFilter_KeyPressed;
             System.Windows.Forms.Application.AddMessageFilter(_keypressFilter);
-
+            
             _player = axWMP;
             _player.stretchToFit = true;
             axWMP.uiMode = "none";
@@ -115,14 +116,13 @@ namespace WindowsSoftberyPlayer.ControlBar
 
             labelRunedEvent.Visible = false;
 
-            _sub = new Dictionary<string, Subtiles.Subtile>();
+            _sub = new Dictionary<string, Subtile>();
 
             if (Owner == null)
                 Owner = this.ParentForm as FormMain;
 
             panelControl.BringToFront();
             Invalidate();
-            //subtilesManager();
         }
 
         private void subtilesManager()
@@ -234,6 +234,14 @@ namespace WindowsSoftberyPlayer.ControlBar
         protected override void OnPaint(PaintEventArgs e)
         {
             base.OnPaint(e);
+
+            var a = BackColor.A;
+            var r = BackColor.R;
+            var g = BackColor.G;
+            var b = BackColor.B;
+
+            OpacityColor = Color.FromArgb(a * (Opacity / 100), r * (Opacity / 100), g * (Opacity / 100), b * (Opacity / 100));
+            //pictureBox1.BackColor = OpacityColor;
         }
 
         #region FullScreen
@@ -466,10 +474,10 @@ namespace WindowsSoftberyPlayer.ControlBar
                     if (File.Exists(_videoName + ".srt"))
                     {
                         _subtilesFile = _videoName + ".srt";
-                        //var manager = new WSPSubtile.SubtileManager();
-                        var sub = new Subtiles.SubtileManager(_subtilesFile);
-                        MessageBox.Show(sub.Count.ToString());
-                        //manager.ReadFromFile(_subtilesFile);
+                        //var manager = new SubtileManager();
+                        var sub = new SubtileManager(_subtilesFile);
+                        //MessageBox.Show(sub.Count.ToString());
+                        //sub.ReadFromFile(_subtilesFile);
                         _manager = sub;
                     }
                     await ShowEventLabel("Open file");
@@ -633,6 +641,8 @@ namespace WindowsSoftberyPlayer.ControlBar
                 labelSubtilesLine1.Visible = true;
                 labelSubtilesLine2.Visible = true;
                 labelSubtilesLine3.Visible = true;
+                labelOnOff.Text = "On";
+                labelOnOff.ForeColor = Color.FromArgb(0, 255, 0);
                 ShowSubtiles = true;
                 Refresh();
             }
@@ -642,6 +652,8 @@ namespace WindowsSoftberyPlayer.ControlBar
                 labelSubtilesLine1.Visible = false;
                 labelSubtilesLine2.Visible = false;
                 labelSubtilesLine3.Visible = false;
+                labelOnOff.Text = "Off";
+                labelOnOff.ForeColor = Color.FromArgb(255, 0, 0);
                 Refresh();
             }
         }

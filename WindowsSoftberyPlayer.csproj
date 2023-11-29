@@ -127,8 +127,6 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Subtiles\Subtile.cs" />
-    <Compile Include="Subtiles\SubtileManager.cs" />
     <EmbeddedResource Include="ControlBar\VideoControlBar.resx">
       <DependentUpon>VideoControlBar.cs</DependentUpon>
     </EmbeddedResource>

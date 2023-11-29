@@ -1,4 +1,4 @@
-// Version: 1.0.0.386
+// Version: 1.0.0.434
 namespace WindowsSoftberyPlayer.ControlBar
 {
     partial class VideoControlBar
@@ -31,6 +31,9 @@ namespace WindowsSoftberyPlayer.ControlBar
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(VideoControlBar));
             this.panelControl = new System.Windows.Forms.Panel();
+            this.labelSubtilesOnOffText = new System.Windows.Forms.Label();
+            this.labelOnOff = new System.Windows.Forms.Label();
+            this.pbSubtilesOnOff = new System.Windows.Forms.PictureBox();
             this.colorSliderTrackBar = new MB.Controls.ColorSliderV2();
             this.pbSettings = new System.Windows.Forms.PictureBox();
             this.pbVolumeDown = new System.Windows.Forms.PictureBox();
@@ -53,8 +56,8 @@ namespace WindowsSoftberyPlayer.ControlBar
             this.axWMP = new AxWMPLib.AxWindowsMediaPlayer();
             this.labelSubtilesLine2 = new WindowsSoftberyPlayer.Labels.LabelSubtiles();
             this.labelSubtilesLine3 = new WindowsSoftberyPlayer.Labels.LabelSubtiles();
-            this.pbSubtilesOnOff = new System.Windows.Forms.PictureBox();
             this.panelControl.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pbSubtilesOnOff)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbSettings)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbVolumeDown)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbVolumeUp)).BeginInit();
@@ -66,7 +69,6 @@ namespace WindowsSoftberyPlayer.ControlBar
             ((System.ComponentModel.ISupportInitialize)(this.pbPlay)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbRewind)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.axWMP)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pbSubtilesOnOff)).BeginInit();
             this.SuspendLayout();
             // 
             // panelControl
@@ -75,6 +77,8 @@ namespace WindowsSoftberyPlayer.ControlBar
             | System.Windows.Forms.AnchorStyles.Right)));
             this.panelControl.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.panelControl.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(70)))), ((int)(((byte)(77)))), ((int)(((byte)(95)))));
+            this.panelControl.Controls.Add(this.labelSubtilesOnOffText);
+            this.panelControl.Controls.Add(this.labelOnOff);
             this.panelControl.Controls.Add(this.pbSubtilesOnOff);
             this.panelControl.Controls.Add(this.colorSliderTrackBar);
             this.panelControl.Controls.Add(this.pbSettings);
@@ -96,6 +100,42 @@ namespace WindowsSoftberyPlayer.ControlBar
             this.panelControl.Name = "panelControl";
             this.panelControl.Size = new System.Drawing.Size(1059, 80);
             this.panelControl.TabIndex = 36;
+            // 
+            // labelSubtilesOnOffText
+            // 
+            this.labelSubtilesOnOffText.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.labelSubtilesOnOffText.AutoSize = true;
+            this.labelSubtilesOnOffText.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.labelSubtilesOnOffText.ForeColor = System.Drawing.Color.White;
+            this.labelSubtilesOnOffText.Location = new System.Drawing.Point(757, 56);
+            this.labelSubtilesOnOffText.Name = "labelSubtilesOnOffText";
+            this.labelSubtilesOnOffText.Size = new System.Drawing.Size(54, 15);
+            this.labelSubtilesOnOffText.TabIndex = 69;
+            this.labelSubtilesOnOffText.Text = "Subtiles:";
+            // 
+            // labelOnOff
+            // 
+            this.labelOnOff.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.labelOnOff.AutoSize = true;
+            this.labelOnOff.ForeColor = System.Drawing.Color.Lime;
+            this.labelOnOff.Location = new System.Drawing.Point(817, 58);
+            this.labelOnOff.Name = "labelOnOff";
+            this.labelOnOff.Size = new System.Drawing.Size(21, 13);
+            this.labelOnOff.TabIndex = 67;
+            this.labelOnOff.Text = "On";
+            // 
+            // pbSubtilesOnOff
+            // 
+            this.pbSubtilesOnOff.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.pbSubtilesOnOff.BackColor = System.Drawing.Color.Transparent;
+            this.pbSubtilesOnOff.Image = global::WindowsSoftberyPlayer.Properties.Resources.open;
+            this.pbSubtilesOnOff.Location = new System.Drawing.Point(849, 55);
+            this.pbSubtilesOnOff.Name = "pbSubtilesOnOff";
+            this.pbSubtilesOnOff.Size = new System.Drawing.Size(20, 20);
+            this.pbSubtilesOnOff.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pbSubtilesOnOff.TabIndex = 66;
+            this.pbSubtilesOnOff.TabStop = false;
+            this.pbSubtilesOnOff.Click += new System.EventHandler(this.pbSubtilesOnOff_Click);
             // 
             // colorSliderTrackBar
             // 
@@ -446,19 +486,6 @@ namespace WindowsSoftberyPlayer.ControlBar
             this.labelSubtilesLine3.Transparency = 90;
             this.labelSubtilesLine3.TextChanged += new System.EventHandler(this.labelSubtilesLine3_TextChanged);
             // 
-            // pbSubtilesOnOff
-            // 
-            this.pbSubtilesOnOff.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.pbSubtilesOnOff.BackColor = System.Drawing.Color.Transparent;
-            this.pbSubtilesOnOff.Image = global::WindowsSoftberyPlayer.Properties.Resources.open;
-            this.pbSubtilesOnOff.Location = new System.Drawing.Point(851, 57);
-            this.pbSubtilesOnOff.Name = "pbSubtilesOnOff";
-            this.pbSubtilesOnOff.Size = new System.Drawing.Size(20, 20);
-            this.pbSubtilesOnOff.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pbSubtilesOnOff.TabIndex = 66;
-            this.pbSubtilesOnOff.TabStop = false;
-            this.pbSubtilesOnOff.Click += new System.EventHandler(this.pbSubtilesOnOff_Click);
-            // 
             // VideoControlBar
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -474,6 +501,7 @@ namespace WindowsSoftberyPlayer.ControlBar
             this.Size = new System.Drawing.Size(1059, 498);
             this.panelControl.ResumeLayout(false);
             this.panelControl.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pbSubtilesOnOff)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbSettings)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbVolumeDown)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbVolumeUp)).EndInit();
@@ -485,7 +513,6 @@ namespace WindowsSoftberyPlayer.ControlBar
             ((System.ComponentModel.ISupportInitialize)(this.pbPlay)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbRewind)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.axWMP)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pbSubtilesOnOff)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -516,5 +543,7 @@ namespace WindowsSoftberyPlayer.ControlBar
         private Labels.LabelSubtiles labelSubtilesLine2;
         private Labels.LabelSubtiles labelSubtilesLine3;
         private System.Windows.Forms.PictureBox pbSubtilesOnOff;
+        private System.Windows.Forms.Label labelSubtilesOnOffText;
+        private System.Windows.Forms.Label labelOnOff;
     }
 }

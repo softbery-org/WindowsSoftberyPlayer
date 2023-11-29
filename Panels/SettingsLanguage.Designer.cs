@@ -1,4 +1,4 @@
-// Version: 1.0.0.33
+// Version: 1.0.0.81
 namespace WindowsSoftberyPlayer.Panels
 {
     partial class SettingsLanguage
@@ -40,6 +40,7 @@ namespace WindowsSoftberyPlayer.Panels
             this.comboBoxLangList.Name = "comboBoxLangList";
             this.comboBoxLangList.Size = new System.Drawing.Size(152, 21);
             this.comboBoxLangList.TabIndex = 0;
+            this.comboBoxLangList.SelectedIndexChanged += new System.EventHandler(this.comboBoxLangList_SelectedIndexChanged);
             // 
             // labelLanguage
             // 
@@ -50,13 +51,13 @@ namespace WindowsSoftberyPlayer.Panels
             this.labelLanguage.TabIndex = 1;
             this.labelLanguage.Text = "Language:";
             // 
-            // SettingsLanguages
+            // SettingsLanguage
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.labelLanguage);
             this.Controls.Add(this.comboBoxLangList);
-            this.Name = "SettingsLanguages";
+            this.Name = "SettingsLanguage";
             this.Size = new System.Drawing.Size(250, 41);
             this.ResumeLayout(false);
             this.PerformLayout();

@@ -1,4 +1,4 @@
-// Version: 1.0.0.393
+// Version: 1.0.0.441
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using IniParser;
 using IniParser.Model;
+using Translator;
 
 namespace WindowsSoftberyPlayer
 {
@@ -21,7 +22,8 @@ namespace WindowsSoftberyPlayer
         {
             // Read config
             Config.Read();
-            //IniConfig.Configuration.Read(args);
+            // Set application translation language
+            Language.SetLanguage(Config.Parameters["Player"]["Language"]);
             // Application
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
@@ -31,6 +33,38 @@ namespace WindowsSoftberyPlayer
         
     }
 
+    public static class Language
+    {
+        public static ILanguage Translation { get; private set; }
+        public static IList<ILanguage> LanguagesList { get; private set; } = new List<ILanguage>();
+
+        public static void ChangeLanguage(string language)
+        {
+            foreach (var item in LanguagesList)
+            {
+                if (item.Name == language)
+                {
+                    Translation = item.UseLanguage() as ILanguage;
+                }
+            }
+        }
+
+        public static void SetLanguage(string lang)
+        {
+            var languages = Translator.Language.LoadLanguage();
+            
+            LanguagesList = languages;
+
+            foreach (var language in LanguagesList)
+            {
+                if (language.Name == lang)
+                {
+                    Translation = language.UseLanguage() as ILanguage;
+                }
+            }
+        }
+    }
+    
     public static class Config
     {
         private static string _directory = AppDomain.CurrentDomain.BaseDirectory;
@@ -74,7 +108,7 @@ namespace WindowsSoftberyPlayer
                 {
                     Byte[] application = new UTF8Encoding(true).GetBytes($"[Player]{Environment.NewLine}");
                     fs.Write(application, 0, application.Length);
-                    Byte[] lang = new UTF8Encoding(true).GetBytes($"Language=en_EN{Environment.NewLine}");
+                    Byte[] lang = new UTF8Encoding(true).GetBytes($"Language=English{Environment.NewLine}");
                     fs.Write(lang, 0, lang.Length);
                     Byte[] control_template = new UTF8Encoding(true).GetBytes($"ControlTemplate=Default{Environment.NewLine}");
                     fs.Write(control_template, 0, control_template.Length);

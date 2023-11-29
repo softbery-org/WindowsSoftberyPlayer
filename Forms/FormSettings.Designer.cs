@@ -1,4 +1,4 @@
-// Version: 1.0.0.389
+// Version: 1.0.0.437
 using System.Reflection;
 using System.Resources;
 
@@ -56,6 +56,7 @@ namespace WindowsSoftberyPlayer.Forms
             this.btnSave.TabIndex = 1;
             this.btnSave.Text = "Save";
             this.btnSave.UseVisualStyleBackColor = true;
+            this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
             // 
             // labelOptions
             // 
