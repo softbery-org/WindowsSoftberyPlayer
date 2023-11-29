@@ -1,4 +1,4 @@
-// Version: 1.0.0.495
+// Version: 1.0.0.496
 using AxWMPLib;
 using System;
 using System.Collections.Generic;

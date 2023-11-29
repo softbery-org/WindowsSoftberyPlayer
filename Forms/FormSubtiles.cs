@@ -1,4 +1,4 @@
-// Version: 1.0.0.281
+// Version: 1.0.0.282
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -8,7 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using WSPSubtile;
+using VideoSubtile;
 
 namespace WindowsSoftberyPlayer.Forms
 {
@@ -18,8 +18,8 @@ namespace WindowsSoftberyPlayer.Forms
         {
             InitializeComponent();
 
-            var manager = new WSPSubtile.SubtileManager();
-            var sub = new WSPSubtile.Subtile();
+            var manager = new SubtileManager();
+            var sub = new Subtile();
         }
 
         private void listBoxStartTime_SelectedIndexChanged(object sender, EventArgs e)

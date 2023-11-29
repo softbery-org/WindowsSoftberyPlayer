@@ -1,4 +1,4 @@
-// Version: 1.0.0.120
+// Version: 1.0.0.121
 namespace WindowsSoftberyPlayer.Panels
 {
     partial class SettingsSubtile
