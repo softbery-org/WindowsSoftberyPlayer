@@ -1,4 +1,4 @@
-// Version: 1.0.0.437
+// Version: 1.0.0.495
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -11,8 +11,8 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Translator;
-using WindowsSoftberyPlayer.ControlBar;
 using WindowsSoftberyPlayer.Filters;
+using WindowsSoftberyPlayer.Panels;
 
 namespace WindowsSoftberyPlayer.Forms
 {
@@ -30,7 +30,7 @@ namespace WindowsSoftberyPlayer.Forms
         /// <example>
         /// translation.GetString("name");
         /// </example>
-        private static ResourceManager _translation = new ResourceManager($"WindowsSoftberyPlayer.Languages.{Config.Parameters["Player"]["Language"]}", Assembly.GetExecutingAssembly());
+        //private static ResourceManager _translation = new ResourceManager($"WindowsSoftberyPlayer.Languages.{Config.Parameters["Player"]["Language"]}", Assembly.GetExecutingAssembly());
 
         public FormMain()
         {
@@ -39,20 +39,27 @@ namespace WindowsSoftberyPlayer.Forms
             _keypressFilter = new KeyPressFilter();
             _keypressFilter.KeyPressed += _keypressFilter_KeyPressed; ;
             Application.AddMessageFilter(_keypressFilter);
-
-            /*var l = new Translator.Language();
-            var s = "";
-            foreach (var lang in l.LangList)
-            {
-                var la = lang.Lang().GetType();
-
-                s += la.ToString() + Environment.NewLine;//la.ToString() + Environment.NewLine;
-            }
-
-            MessageBox.Show(s);*/
-
             videoControlBar1.Owner = this;
-            ReadSubtile();
+
+            translate();
+            SettingsLanguage.OnLanguageChange += RefreshForm;
+        }
+
+        private void RefreshForm()
+        {
+            this.ChangeLanguage();
+            translate();
+        }
+
+        private void RefreshForm(string name)
+        {
+            this.ChangeLanguage(name);
+            translate();
+        }
+
+        private void translate()
+        {
+            
         }
 
         private void _keypressFilter_KeyPressed(object sender, KeyPressEventArgs e)
@@ -110,7 +117,6 @@ namespace WindowsSoftberyPlayer.Forms
             if (isFullscreen)
             {
                 fullscreenOff();
-
             }
             else
             {
@@ -155,11 +161,6 @@ namespace WindowsSoftberyPlayer.Forms
         protected override void OnPaint(PaintEventArgs e)
         {
             base.OnPaint(e);
-        }
-
-        private void ReadSubtile()
-        {
-
         }
     }
 }

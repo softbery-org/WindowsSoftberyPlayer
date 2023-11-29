@@ -1,4 +1,4 @@
-// Version: 1.0.0.437
+// Version: 1.0.0.495
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -11,6 +11,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Translator;
+using WindowsSoftberyPlayer.Panels;
 
 namespace WindowsSoftberyPlayer.Forms
 {
@@ -31,6 +32,19 @@ namespace WindowsSoftberyPlayer.Forms
             InitializeComponent();
             translate();
             createListBoxOptions();
+            SettingsLanguage.OnLanguageChange += RefreshForm;
+        }
+
+        private void RefreshForm()
+        {
+            this.ChangeLanguage();
+            translate();
+        }
+
+        private void RefreshForm(string name)
+        {
+            this.ChangeLanguage(name);
+            translate();
         }
 
         private void translate()
@@ -80,12 +94,15 @@ namespace WindowsSoftberyPlayer.Forms
 
         private void btnSave_Click(object sender, EventArgs e)
         {
-            foreach (var item in Application.OpenForms)
-            {
-                var form = item as Form;
-                form.Refresh();
-            }
-            Refresh();
+            Config.Write();
+            this.Close();
+        }
+
+        private void btnCancel_Click(object sender, EventArgs e)
+        {
+            Config.Read();
+            RefreshForm();
+            this.Close();
         }
     }
 }

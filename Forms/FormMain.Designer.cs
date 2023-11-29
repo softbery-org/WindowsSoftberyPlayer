@@ -1,4 +1,4 @@
-// Version: 1.0.0.437
+// Version: 1.0.0.495
 namespace WindowsSoftberyPlayer.Forms
 {
     partial class FormMain

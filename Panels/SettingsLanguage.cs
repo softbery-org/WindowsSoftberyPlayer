@@ -1,4 +1,4 @@
-// Version: 1.0.0.80
+// Version: 1.0.0.138
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -13,6 +13,7 @@ namespace WindowsSoftberyPlayer.Panels
 {
     public partial class SettingsLanguage : UserControl
     {
+        public static Action<string> OnLanguageChange;
         public SettingsLanguage()
         {
             InitializeComponent();
@@ -36,6 +37,8 @@ namespace WindowsSoftberyPlayer.Panels
         private void comboBoxLangList_SelectedIndexChanged(object sender, EventArgs e)
         {
             Language.ChangeLanguage(comboBoxLangList.SelectedItem.ToString());
+            SettingsLanguage.OnLanguageChange(comboBoxLangList.SelectedItem.ToString());
+            Config.Parameters["Player"]["Language"] = comboBoxLangList.SelectedItem.ToString();
         }
     }
 }

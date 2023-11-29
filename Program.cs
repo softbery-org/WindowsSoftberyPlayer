@@ -1,4 +1,4 @@
-// Version: 1.0.0.441
+// Version: 1.0.0.499
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -24,6 +24,7 @@ namespace WindowsSoftberyPlayer
             Config.Read();
             // Set application translation language
             Language.SetLanguage(Config.Parameters["Player"]["Language"]);
+            
             // Application
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
@@ -37,6 +38,14 @@ namespace WindowsSoftberyPlayer
     {
         public static ILanguage Translation { get; private set; }
         public static IList<ILanguage> LanguagesList { get; private set; } = new List<ILanguage>();
+        
+        /// <summary>
+        /// Change or refresh language
+        /// </summary>
+        public static void ChangeLanguage()
+        {
+            Translation = Translation.UseLanguage() as ILanguage;
+        }
 
         public static void ChangeLanguage(string language)
         {
@@ -47,6 +56,16 @@ namespace WindowsSoftberyPlayer
                     Translation = item.UseLanguage() as ILanguage;
                 }
             }
+        }
+
+        public static void ChangeLanguage(this object obj, string language = null)
+        {
+            if (language != null)
+            {
+                ChangeLanguage(language);
+            }
+            var control = obj as Control;
+            control.Refresh();
         }
 
         public static void SetLanguage(string lang)
@@ -96,7 +115,8 @@ namespace WindowsSoftberyPlayer
         {
             var config = new FileInfo(_directory + "config.ini");
             var ini = new IniParser.FileIniDataParser();
-            Parameters = ini.Parser.Parse(config.FullName);
+            ini.WriteFile(config.FullName, Parameters);
+            Read();
         }
 
         static void createConfig(FileInfo file)
