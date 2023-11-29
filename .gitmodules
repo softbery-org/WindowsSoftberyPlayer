@@ -7,3 +7,6 @@
 [submodule "Polski"]
 	path = Polski
 	url = git@github.com:softbery-org/WindowsSoftberyPlayer_Language_Polski.git
+[submodule "VideoSubtile"]
+	path = VideoSubtile
+	url = git@github.com:softbery-org/WindowsSoftberyPlayer_VideoSubtile.git

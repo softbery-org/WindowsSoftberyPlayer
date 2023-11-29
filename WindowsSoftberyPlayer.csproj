@@ -215,13 +215,13 @@
       <Project>{d3ebc32a-efb0-4684-9124-6f777428150d}</Project>
       <Name>ColorSlider</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Translator\Translator.csproj">
+    <ProjectReference Include="Translator\Translator.csproj">
       <Project>{d8bc80a6-34b6-41ab-b734-65f9252ea5a2}</Project>
       <Name>Translator</Name>
     </ProjectReference>
-    <ProjectReference Include="..\WSPSubtile\WSPSubtile.csproj">
+    <ProjectReference Include="VideoSubtile\VideoSubtile.csproj">
       <Project>{4f9f5e9e-55fc-4c9f-8d04-f4fb5a97be68}</Project>
-      <Name>WSPSubtile</Name>
+      <Name>VideoSubtile</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
