@@ -1,4 +1,4 @@
-// Version: 1.0.0.282
+// Version: 1.0.0.437
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -19,7 +19,7 @@ namespace WindowsSoftberyPlayer.Forms
             InitializeComponent();
 
             var manager = new SubtileManager();
-            var sub = new Subtile();
+            var sub = new SubtileManager();
         }
 
         private void listBoxStartTime_SelectedIndexChanged(object sender, EventArgs e)

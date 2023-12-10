@@ -1,4 +1,4 @@
-// Version: 1.0.0.496
+// Version: 1.0.0.648
 using AxWMPLib;
 using System;
 using System.Collections.Generic;
@@ -81,7 +81,6 @@ namespace WindowsSoftberyPlayer.ControlBar
         public string SubtilesFile { get; private set; }
         public bool ShowSubtiles { get; set; } = false;
         public TimeWidget TimeWidgetValue { get; set; } = TimeWidget.Left;
-        private Dictionary<string, Subtile> _sub;
         private SubtileManager _manager = new SubtileManager();
         //private List<SubtileSrt> _list = new List<SubtileSrt>();
 
@@ -137,12 +136,10 @@ namespace WindowsSoftberyPlayer.ControlBar
             _timer.Interval = 100;
             _timer.Tick += _timer_Tick;
 
-
-            _sub = new Dictionary<string, Subtile>();
-
             if (Owner == null)
                 Owner = this.ParentForm as FormMain;
 
+            //subtiles1.BringToFront();
             panelControl.BringToFront();
             
             // When settings language are change then refresh control
@@ -151,7 +148,8 @@ namespace WindowsSoftberyPlayer.ControlBar
             ShowEventLabel += drawEventName;
             
             translate();
-            showHideSubtiles();
+            clearSubtiles();
+            hideSubtiles();
             
             Invalidate();
         }
@@ -201,6 +199,10 @@ namespace WindowsSoftberyPlayer.ControlBar
                         _player.Ctlcontrols.currentPosition += SeekTime;
                     else
                         _player.Ctlcontrols.currentPosition = _player.currentMedia.duration;
+                }
+                if (e.KeyChar == (char)Keys.Space)
+                {
+                    PlayPause();
                 }
             }
         }
@@ -281,28 +283,9 @@ namespace WindowsSoftberyPlayer.ControlBar
                 labelDurationTime.Text = full_time;
                 labelCurrentVolume.Text = Convert.ToInt32(_player.settings.volume).ToString();
                 labelVideoName.Text = _videoName;
-                foreach (var item in _manager.GetSubtiles())
-                {
-                    showHideSubtiles(item, sub_time);
-                }
-                /*foreach (var item in _manager.GetSubtiles())
-                {
-                    if (sub_time == item.Key)
-                    {
-                        if (item.Value.Text1!="")
-                            labelSubtilesLine1.Text = item.Value.Text1;
-                        if (item.Value.Text2 != "")
-                            labelSubtilesLine2.Text = item.Value.Text2;
-                        if (item.Value.Text3 != "")
-                            labelSubtilesLine3.Text = item.Value.Text3;
-                    }
-                    if (sub_time == item.Value.EndTime)
-                    {
-                        labelSubtilesLine1.Text = "";
-                        labelSubtilesLine2.Text = "";
-                        labelSubtilesLine3.Text = "";
-                    }
-                }*/
+
+                // Show subtiles
+                ShowingSubtiles(sub_time);
                
                 if (WidgetTime)
                 {
@@ -325,31 +308,95 @@ namespace WindowsSoftberyPlayer.ControlBar
         }
         #endregion
 
-        private void showHideSubtiles()
+        private void ShowingSubtiles(string time)
         {
-            labelSubtilesLine1.Text = "";
-            labelSubtilesLine2.Text = "";
-            labelSubtilesLine3.Text = "";
+            Task.Run(() =>
+            {
+                this.Invoke((MethodInvoker)(() =>
+                {
+                    bool show = false;
+                    int run = -1;
+                    foreach (var item in _manager.Subtiles)
+                    {
+                        if (ParseTimeSpan(time) >= ParseTimeSpan(item.Start))
+                        {
+                            show = true;
+                            run = 1;
+                        }
+                        if (ParseTimeSpan(time) >= ParseTimeSpan(item.End))
+                        {
+                            show = false;
+                            run = 0;
+                        }
+
+                        if (show && run == 1)
+                        {
+                            clearSubtiles();
+
+                            if (item.Text.Count > 0)
+                            {
+                                labelSubtiles1.Text = item.Text[0];
+                            }
+                            else
+                            {
+                                labelSubtiles2.Text = "";
+                                labelSubtiles3.Text = "";
+                            }
+
+                            if (item.Text.Count > 1)
+                            {
+                                labelSubtiles1.Text = item.Text[0];
+                                labelSubtiles2.Text = item.Text[1];
+                            }
+                            else
+                            {
+                                labelSubtiles3.Text = "";
+                            }
+
+                            if (item.Text.Count > 2)
+                            {
+                                labelSubtiles1.Text = item.Text[0];
+                                labelSubtiles2.Text = item.Text[1];
+                                labelSubtiles3.Text = item.Text[2];
+                            }
+                        }
+                        else if (!show && run == 0)
+                        {
+                            clearSubtiles();
+                        }
+                        run = -1;
+                    }
+                }));
+
+                /*if (Task.CompletedTask.IsCompleted)
+                {
+                    labelRunedEvent.Invoke((MethodInvoker)(() =>
+                    {
+                        labelRunedEvent.Visible = false;
+                    }));
+                }*/
+            });
         }
 
-        private void showHideSubtiles(KeyValuePair<string, Subtile> item, string time= null)
+        private void clearSubtiles()
         {
+            labelSubtiles1.Text = "";
+            labelSubtiles2.Text = "";
+            labelSubtiles3.Text = "";
+        }
 
-            if (time == item.Key)
-            {
-                if (item.Value.Text1 != "")
-                    labelSubtilesLine1.Text = item.Value.Text1;
-                if (item.Value.Text2 != "")
-                    labelSubtilesLine2.Text = item.Value.Text2;
-                if (item.Value.Text3 != "")
-                    labelSubtilesLine3.Text = item.Value.Text3;
-            }
-            if (time == item.Value.EndTime || time==null)
-            {
-                labelSubtilesLine1.Text = "";
-                labelSubtilesLine2.Text = "";
-                labelSubtilesLine3.Text = "";
-            }
+        private void showSubtiles()
+        {
+            labelSubtiles1.Visible = true;
+            labelSubtiles2.Visible = true;
+            labelSubtiles3.Visible = true;
+        }
+
+        private void hideSubtiles()
+        {
+            labelSubtiles1.Visible = false;
+            labelSubtiles2.Visible = false;
+            labelSubtiles3.Visible = false;
         }
 
         private TimeSpan ParseTimeSpan(string time)
@@ -375,7 +422,12 @@ namespace WindowsSoftberyPlayer.ControlBar
         #region Mouse Event
         private void pbPlay_Click(object sender, EventArgs e)
         {
-            if (_player != null && _player.URL!="")
+            PlayPause();
+        }
+
+        private void PlayPause()
+        {
+            if (_player != null && _player.URL != "")
             {
                 if (_player.playState == WMPPlayState.wmppsPlaying)
                 {
@@ -450,10 +502,10 @@ namespace WindowsSoftberyPlayer.ControlBar
                     if (File.Exists(_videoName + ".srt"))
                     {
                         _subtilesFile = _videoName + ".srt";
-                        //var manager = new SubtileManager();
+                        
                         var sub = new SubtileManager(_subtilesFile);
-                        //MessageBox.Show(sub.Count.ToString());
-                        //sub.ReadFromFile(_subtilesFile);
+                        sub.Read();
+                        showSubtiles();
                         _manager = sub;
                     }
                     await ShowEventLabel("Open file");
@@ -468,10 +520,7 @@ namespace WindowsSoftberyPlayer.ControlBar
 
         private void pbFullscreen_Click(object sender, EventArgs e)
         {
-            if (_player != null)
-            {
-                FullScreen();
-            }
+            FullScreen();
         }
 
         private void pbSettings_Click(object sender, EventArgs e)
@@ -596,28 +645,11 @@ namespace WindowsSoftberyPlayer.ControlBar
         }
         #endregion
 
-        private void labelSubtilesLine1_TextChanged(object sender, EventArgs e)
-        {
-            labelSubtilesLine1.Location = new Point((Width / 2) - (labelSubtilesLine1.Width), Height - ((4 * labelSubtilesLine1.Height) + labelSubtilesLine1.Height));
-        }
-
-        private void labelSubtilesLine2_TextChanged(object sender, EventArgs e)
-        {
-            labelSubtilesLine2.Location = new Point((Width / 2) - (labelSubtilesLine2.Width), Height - ((2 * labelSubtilesLine1.Height) + labelSubtilesLine1.Height));
-        }
-        private void labelSubtilesLine3_TextChanged(object sender, EventArgs e)
-        {
-            labelSubtilesLine3.Location = new Point((Width / 2) - (labelSubtilesLine3.Width), Height - ((0 * labelSubtilesLine3.Height) + labelSubtilesLine3.Height));
-        }
-
         private void pbSubtilesOnOff_Click(object sender, EventArgs e)
         {
             if (!ShowSubtiles)
             {
-                
-                labelSubtilesLine1.Visible = true;
-                labelSubtilesLine2.Visible = true;
-                labelSubtilesLine3.Visible = true;
+                showSubtiles();
                 labelOnOff.Text = "On";
                 labelOnOff.ForeColor = Color.FromArgb(0, 255, 0);
                 ShowSubtiles = true;
@@ -628,10 +660,7 @@ namespace WindowsSoftberyPlayer.ControlBar
             }
             else
             {
-                
-                labelSubtilesLine1.Visible = false;
-                labelSubtilesLine2.Visible = false;
-                labelSubtilesLine3.Visible = false;
+                hideSubtiles();
                 labelOnOff.Text = "Off";
                 labelOnOff.ForeColor = Color.FromArgb(255, 0, 0);
                 ShowSubtiles = false;
@@ -641,6 +670,19 @@ namespace WindowsSoftberyPlayer.ControlBar
                 Refresh();
             }
             
+        }
+
+        private void axWMP_DoubleClickEvent(object sender, _WMPOCXEvents_DoubleClickEvent e)
+        {
+            this.FullScreen();
+        }
+
+        private void axWMP_ClickEvent(object sender, _WMPOCXEvents_ClickEvent e)
+        {
+            if (panelControl.Visible && _fullscreen==true)
+            {
+                this.panelControl.Hide();
+            }
         }
     }
 

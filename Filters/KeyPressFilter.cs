@@ -1,4 +1,4 @@
-// Version: 1.0.0.436
+// Version: 1.0.0.591
 using System;
 using System.Collections.Generic;
 using System.Drawing;
@@ -31,7 +31,7 @@ namespace WindowsSoftberyPlayer.Filters
                     if (KeyPressed != null)
                     {
                         var k = new KeyPressEventArgs((char)m.WParam);
-                        KeyPressed(this, k);
+                        KeyPressed.Invoke(this, k);
                     }
                     break;
             }

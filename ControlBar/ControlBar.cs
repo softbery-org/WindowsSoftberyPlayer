@@ -1,4 +1,4 @@
-// Version: 1.0.0.276
+// Version: 1.0.0.143
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -9,13 +9,18 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace WindowsSoftberyPlayer.Panels
+namespace WindowsSoftberyPlayer.ControlBar
 {
-    public partial class SettingsSubtile : UserControl
+    public partial class ControlBar : UserControl
     {
-        public SettingsSubtile()
+        public ControlBar()
         {
             InitializeComponent();
+        }
+
+        private void pbOpen_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

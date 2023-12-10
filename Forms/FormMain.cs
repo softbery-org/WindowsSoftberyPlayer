@@ -1,4 +1,4 @@
-// Version: 1.0.0.502
+// Version: 1.0.0.657
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -11,6 +11,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Translator;
+using VideoSubtile;
 using WindowsSoftberyPlayer.Filters;
 using WindowsSoftberyPlayer.Panels;
 
@@ -38,8 +39,7 @@ namespace WindowsSoftberyPlayer.Forms
             
             _keypressFilter = new KeyPressFilter();
             _keypressFilter.KeyPressed += _keypressFilter_KeyPressed; ;
-            Application.AddMessageFilter(_keypressFilter);
-            videoControlBar1.Owner = this;
+            Application.AddMessageFilter(_keypressFilter);            
 
             translate();
             SettingsLanguage.OnLanguageChange += RefreshForm;

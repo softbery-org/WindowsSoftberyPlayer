@@ -1,4 +1,4 @@
-// Version: 1.0.0.146
+// Version: 1.0.0.301
 namespace WindowsSoftberyPlayer.Panels
 {
     partial class SettingsLanguage

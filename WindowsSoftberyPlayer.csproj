@@ -65,11 +65,32 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ControlBar\ControlBar.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ControlBar\ControlBar.Designer.cs">
+      <DependentUpon>ControlBar.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ControlBar\Subtiles.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ControlBar\Subtiles.Designer.cs">
+      <DependentUpon>Subtiles.cs</DependentUpon>
+    </Compile>
     <Compile Include="ControlBar\VideoControlBar.cs">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="ControlBar\VideoControlBar.Designer.cs">
       <DependentUpon>VideoControlBar.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ControlBar\VideoPanel.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ControlBar\VideoPanel.Designer.cs">
+      <DependentUpon>VideoPanel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Ctrl\LabelSubtiles.cs">
+      <SubType>Component</SubType>
     </Compile>
     <Compile Include="Filters\KeyPressFilter.cs" />
     <Compile Include="Filters\MouseMoveFilter.cs" />
@@ -96,6 +117,12 @@
     </Compile>
     <Compile Include="Forms\FormSubtiles.Designer.cs">
       <DependentUpon>FormSubtiles.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\FormVideo.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\FormVideo.Designer.cs">
+      <DependentUpon>FormVideo.cs</DependentUpon>
     </Compile>
     <Compile Include="Labels\LabelEventName.cs">
       <SubType>Component</SubType>
@@ -127,8 +154,17 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="ControlBar\ControlBar.resx">
+      <DependentUpon>ControlBar.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ControlBar\Subtiles.resx">
+      <DependentUpon>Subtiles.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="ControlBar\VideoControlBar.resx">
       <DependentUpon>VideoControlBar.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ControlBar\VideoPanel.resx">
+      <DependentUpon>VideoPanel.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\FormMain.resx">
       <DependentUpon>FormMain.cs</DependentUpon>
@@ -138,6 +174,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\FormSubtiles.resx">
       <DependentUpon>FormSubtiles.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FormVideo.resx">
+      <DependentUpon>FormVideo.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Languages\en_EN.resx">
       <Generator>ResXFileCodeGenerator</Generator>

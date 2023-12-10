@@ -1,4 +1,4 @@
-// Version: 1.0.0.276
+// Version: 1.0.0.143
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -9,11 +9,11 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace WindowsSoftberyPlayer.Panels
+namespace WindowsSoftberyPlayer.Forms
 {
-    public partial class SettingsSubtile : UserControl
+    public partial class FormVideo : Form
     {
-        public SettingsSubtile()
+        public FormVideo()
         {
             InitializeComponent();
         }

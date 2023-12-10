@@ -1,4 +1,4 @@
-// Version: 1.0.0.502
+// Version: 1.0.0.657
 namespace WindowsSoftberyPlayer.Forms
 {
     partial class FormMain
@@ -37,9 +37,9 @@ namespace WindowsSoftberyPlayer.Forms
             this.videoControlBar1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.videoControlBar1.Location = new System.Drawing.Point(0, 0);
             this.videoControlBar1.Name = "videoControlBar1";
-            this.videoControlBar1.Opacity = 50;
+            this.videoControlBar1.Opacity = 1;
             this.videoControlBar1.OpacityColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.videoControlBar1.Owner = null;
+            this.videoControlBar1.Owner = this;
             this.videoControlBar1.SeekTime = 10;
             this.videoControlBar1.ShowSubtiles = false;
             this.videoControlBar1.Size = new System.Drawing.Size(1043, 497);

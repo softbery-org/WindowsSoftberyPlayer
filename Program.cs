@@ -1,4 +1,4 @@
-// Version: 1.0.0.506
+// Version: 1.0.0.661
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -24,7 +24,6 @@ namespace WindowsSoftberyPlayer
             Config.Read();
             // Set application translation language
             Language.SetLanguage(Config.Parameters["Player"]["Language"]);
-            
             // Application
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
@@ -34,11 +33,27 @@ namespace WindowsSoftberyPlayer
         
     }
 
+    public class PlayerInfo
+    {
+        public string Name => "Windows Softbery Player";
+        public string Created => "Softbery by Paweł Tobis";
+        public string Version => "1.0.1.1501";
+    }
+
     public static class Language
     {
         public static ILanguage Translation { get; private set; }
         public static IList<ILanguage> LanguagesList { get; private set; } = new List<ILanguage>();
         
+        private static bool checkWithPlayerVersion(ILanguage language, PlayerInfo player_info)
+        {
+            if (language.PlayerVersion==player_info.Version)
+            {
+                return true;
+            }
+            return false;
+        }
+
         /// <summary>
         /// Change or refresh language
         /// </summary>
@@ -51,7 +66,7 @@ namespace WindowsSoftberyPlayer
         {
             foreach (var item in LanguagesList)
             {
-                if (item.Name == language)
+                if (item.Name == language && checkWithPlayerVersion(item, new PlayerInfo()))
                 {
                     Translation = item.UseLanguage() as ILanguage;
                 }
@@ -71,9 +86,14 @@ namespace WindowsSoftberyPlayer
         public static void SetLanguage(string lang)
         {
             var languages = Translator.Language.LoadLanguage();
+            foreach (var language in languages)
+            {
+                if (Translator.Language.CheckPlayerVersion(language, new PlayerInfo().Version))
+                {
+                    LanguagesList.Add(language);
+                }
+            }
             
-            LanguagesList = languages;
-
             foreach (var language in LanguagesList)
             {
                 if (language.Name == lang)

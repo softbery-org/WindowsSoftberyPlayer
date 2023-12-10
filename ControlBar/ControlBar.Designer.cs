@@ -1,7 +1,7 @@
-// Version: 1.0.0.654
+// Version: 1.0.0.143
 namespace WindowsSoftberyPlayer.ControlBar
 {
-    partial class VideoControlBar
+    partial class ControlBar
     {
         /// <summary> 
         /// Wymagana zmienna projektanta.
@@ -29,7 +29,6 @@ namespace WindowsSoftberyPlayer.ControlBar
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(VideoControlBar));
             this.panelControl = new System.Windows.Forms.Panel();
             this.labelSubtilesOnOffText = new System.Windows.Forms.Label();
             this.labelOnOff = new System.Windows.Forms.Label();
@@ -50,12 +49,6 @@ namespace WindowsSoftberyPlayer.ControlBar
             this.labelVideoName = new System.Windows.Forms.Label();
             this.labelDurationTime = new System.Windows.Forms.Label();
             this.labelCurrentTime = new System.Windows.Forms.Label();
-            this.labelWidgetTime = new System.Windows.Forms.Label();
-            this.labelRunedEvent = new System.Windows.Forms.Label();
-            this.axWMP = new AxWMPLib.AxWindowsMediaPlayer();
-            this.labelSubtiles1 = new WindowsSoftberyPlayer.Labels.LabelSubtiles();
-            this.labelSubtiles2 = new WindowsSoftberyPlayer.Labels.LabelSubtiles();
-            this.labelSubtiles3 = new WindowsSoftberyPlayer.Labels.LabelSubtiles();
             this.panelControl.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbSubtilesOnOff)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbSettings)).BeginInit();
@@ -68,13 +61,10 @@ namespace WindowsSoftberyPlayer.ControlBar
             ((System.ComponentModel.ISupportInitialize)(this.pbStop)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbPlay)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbRewind)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.axWMP)).BeginInit();
             this.SuspendLayout();
             // 
             // panelControl
             // 
-            this.panelControl.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
             this.panelControl.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.panelControl.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(70)))), ((int)(((byte)(77)))), ((int)(((byte)(95)))));
             this.panelControl.Controls.Add(this.labelSubtilesOnOffText);
@@ -96,10 +86,11 @@ namespace WindowsSoftberyPlayer.ControlBar
             this.panelControl.Controls.Add(this.labelVideoName);
             this.panelControl.Controls.Add(this.labelDurationTime);
             this.panelControl.Controls.Add(this.labelCurrentTime);
-            this.panelControl.Location = new System.Drawing.Point(0, 418);
+            this.panelControl.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panelControl.Location = new System.Drawing.Point(0, 0);
             this.panelControl.Name = "panelControl";
-            this.panelControl.Size = new System.Drawing.Size(1059, 80);
-            this.panelControl.TabIndex = 36;
+            this.panelControl.Size = new System.Drawing.Size(824, 81);
+            this.panelControl.TabIndex = 37;
             // 
             // labelSubtilesOnOffText
             // 
@@ -107,7 +98,7 @@ namespace WindowsSoftberyPlayer.ControlBar
             this.labelSubtilesOnOffText.AutoSize = true;
             this.labelSubtilesOnOffText.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.labelSubtilesOnOffText.ForeColor = System.Drawing.Color.White;
-            this.labelSubtilesOnOffText.Location = new System.Drawing.Point(757, 56);
+            this.labelSubtilesOnOffText.Location = new System.Drawing.Point(522, 57);
             this.labelSubtilesOnOffText.Name = "labelSubtilesOnOffText";
             this.labelSubtilesOnOffText.Size = new System.Drawing.Size(54, 15);
             this.labelSubtilesOnOffText.TabIndex = 69;
@@ -118,7 +109,7 @@ namespace WindowsSoftberyPlayer.ControlBar
             this.labelOnOff.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.labelOnOff.AutoSize = true;
             this.labelOnOff.ForeColor = System.Drawing.Color.Lime;
-            this.labelOnOff.Location = new System.Drawing.Point(817, 58);
+            this.labelOnOff.Location = new System.Drawing.Point(582, 59);
             this.labelOnOff.Name = "labelOnOff";
             this.labelOnOff.Size = new System.Drawing.Size(21, 13);
             this.labelOnOff.TabIndex = 67;
@@ -129,13 +120,12 @@ namespace WindowsSoftberyPlayer.ControlBar
             this.pbSubtilesOnOff.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.pbSubtilesOnOff.BackColor = System.Drawing.Color.Transparent;
             this.pbSubtilesOnOff.Image = global::WindowsSoftberyPlayer.Properties.Resources.open;
-            this.pbSubtilesOnOff.Location = new System.Drawing.Point(849, 55);
+            this.pbSubtilesOnOff.Location = new System.Drawing.Point(614, 56);
             this.pbSubtilesOnOff.Name = "pbSubtilesOnOff";
             this.pbSubtilesOnOff.Size = new System.Drawing.Size(20, 20);
             this.pbSubtilesOnOff.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pbSubtilesOnOff.TabIndex = 66;
             this.pbSubtilesOnOff.TabStop = false;
-            this.pbSubtilesOnOff.Click += new System.EventHandler(this.pbSubtilesOnOff_Click);
             // 
             // colorSliderTrackBar
             // 
@@ -155,7 +145,7 @@ namespace WindowsSoftberyPlayer.ControlBar
             0,
             0,
             0});
-            this.colorSliderTrackBar.Location = new System.Drawing.Point(142, 36);
+            this.colorSliderTrackBar.Location = new System.Drawing.Point(142, 37);
             this.colorSliderTrackBar.Maximum = new decimal(new int[] {
             100,
             0,
@@ -180,7 +170,7 @@ namespace WindowsSoftberyPlayer.ControlBar
             0});
             this.colorSliderTrackBar.ShowDivisionsText = true;
             this.colorSliderTrackBar.ShowSmallScale = true;
-            this.colorSliderTrackBar.Size = new System.Drawing.Size(729, 23);
+            this.colorSliderTrackBar.Size = new System.Drawing.Size(494, 23);
             this.colorSliderTrackBar.SmallChange = new decimal(new int[] {
             1,
             0,
@@ -200,33 +190,30 @@ namespace WindowsSoftberyPlayer.ControlBar
             0,
             0,
             0});
-            this.colorSliderTrackBar.Scroll += new System.Windows.Forms.ScrollEventHandler(this.colorSliderTrackBar_Scroll);
             // 
             // pbSettings
             // 
             this.pbSettings.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.pbSettings.BackColor = System.Drawing.Color.Transparent;
             this.pbSettings.Image = global::WindowsSoftberyPlayer.Properties.Resources.settings;
-            this.pbSettings.Location = new System.Drawing.Point(877, 30);
+            this.pbSettings.Location = new System.Drawing.Point(642, 31);
             this.pbSettings.Name = "pbSettings";
             this.pbSettings.Size = new System.Drawing.Size(40, 40);
             this.pbSettings.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pbSettings.TabIndex = 64;
             this.pbSettings.TabStop = false;
-            this.pbSettings.Click += new System.EventHandler(this.pbSettings_Click);
             // 
             // pbVolumeDown
             // 
             this.pbVolumeDown.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.pbVolumeDown.BackColor = System.Drawing.Color.Transparent;
             this.pbVolumeDown.Image = global::WindowsSoftberyPlayer.Properties.Resources.low_volume;
-            this.pbVolumeDown.Location = new System.Drawing.Point(825, 10);
+            this.pbVolumeDown.Location = new System.Drawing.Point(590, 11);
             this.pbVolumeDown.Name = "pbVolumeDown";
             this.pbVolumeDown.Size = new System.Drawing.Size(20, 20);
             this.pbVolumeDown.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pbVolumeDown.TabIndex = 63;
             this.pbVolumeDown.TabStop = false;
-            this.pbVolumeDown.Click += new System.EventHandler(this.pbVolumeDown_Click);
             // 
             // labelCurrentVolume
             // 
@@ -235,7 +222,7 @@ namespace WindowsSoftberyPlayer.ControlBar
             this.labelCurrentVolume.BackColor = System.Drawing.Color.Transparent;
             this.labelCurrentVolume.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.labelCurrentVolume.ForeColor = System.Drawing.SystemColors.Control;
-            this.labelCurrentVolume.Location = new System.Drawing.Point(850, 12);
+            this.labelCurrentVolume.Location = new System.Drawing.Point(615, 13);
             this.labelCurrentVolume.Name = "labelCurrentVolume";
             this.labelCurrentVolume.Size = new System.Drawing.Size(14, 15);
             this.labelCurrentVolume.TabIndex = 62;
@@ -247,26 +234,24 @@ namespace WindowsSoftberyPlayer.ControlBar
             this.pbVolumeUp.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.pbVolumeUp.BackColor = System.Drawing.Color.Transparent;
             this.pbVolumeUp.Image = global::WindowsSoftberyPlayer.Properties.Resources.audio;
-            this.pbVolumeUp.Location = new System.Drawing.Point(897, 10);
+            this.pbVolumeUp.Location = new System.Drawing.Point(662, 11);
             this.pbVolumeUp.Name = "pbVolumeUp";
             this.pbVolumeUp.Size = new System.Drawing.Size(20, 20);
             this.pbVolumeUp.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pbVolumeUp.TabIndex = 61;
             this.pbVolumeUp.TabStop = false;
-            this.pbVolumeUp.Click += new System.EventHandler(this.pbVolumeUp_Click);
             // 
             // pbMute
             // 
             this.pbMute.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.pbMute.BackColor = System.Drawing.Color.Transparent;
             this.pbMute.Image = global::WindowsSoftberyPlayer.Properties.Resources.mute;
-            this.pbMute.Location = new System.Drawing.Point(799, 10);
+            this.pbMute.Location = new System.Drawing.Point(564, 11);
             this.pbMute.Name = "pbMute";
             this.pbMute.Size = new System.Drawing.Size(20, 20);
             this.pbMute.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pbMute.TabIndex = 60;
             this.pbMute.TabStop = false;
-            this.pbMute.Click += new System.EventHandler(this.pbMute_Click);
             // 
             // label1
             // 
@@ -275,7 +260,7 @@ namespace WindowsSoftberyPlayer.ControlBar
             this.label1.BackColor = System.Drawing.Color.Transparent;
             this.label1.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.label1.ForeColor = System.Drawing.SystemColors.Control;
-            this.label1.Location = new System.Drawing.Point(984, 12);
+            this.label1.Location = new System.Drawing.Point(749, 13);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(13, 15);
             this.label1.TabIndex = 59;
@@ -286,7 +271,7 @@ namespace WindowsSoftberyPlayer.ControlBar
             this.pbOpen.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.pbOpen.BackColor = System.Drawing.Color.Transparent;
             this.pbOpen.Image = global::WindowsSoftberyPlayer.Properties.Resources.open;
-            this.pbOpen.Location = new System.Drawing.Point(923, 30);
+            this.pbOpen.Location = new System.Drawing.Point(688, 31);
             this.pbOpen.Name = "pbOpen";
             this.pbOpen.Size = new System.Drawing.Size(40, 40);
             this.pbOpen.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -299,7 +284,7 @@ namespace WindowsSoftberyPlayer.ControlBar
             this.pbForward.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.pbForward.BackColor = System.Drawing.Color.Transparent;
             this.pbForward.Image = global::WindowsSoftberyPlayer.Properties.Resources.forward;
-            this.pbForward.Location = new System.Drawing.Point(969, 30);
+            this.pbForward.Location = new System.Drawing.Point(734, 31);
             this.pbForward.Name = "pbForward";
             this.pbForward.Size = new System.Drawing.Size(40, 40);
             this.pbForward.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -311,46 +296,43 @@ namespace WindowsSoftberyPlayer.ControlBar
             this.pbFullscreen.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.pbFullscreen.BackColor = System.Drawing.Color.Transparent;
             this.pbFullscreen.Image = global::WindowsSoftberyPlayer.Properties.Resources.fullscreen;
-            this.pbFullscreen.Location = new System.Drawing.Point(1015, 30);
+            this.pbFullscreen.Location = new System.Drawing.Point(780, 31);
             this.pbFullscreen.Name = "pbFullscreen";
             this.pbFullscreen.Size = new System.Drawing.Size(40, 40);
             this.pbFullscreen.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pbFullscreen.TabIndex = 56;
             this.pbFullscreen.TabStop = false;
-            this.pbFullscreen.Click += new System.EventHandler(this.pbFullscreen_Click);
             // 
             // pbStop
             // 
             this.pbStop.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.pbStop.BackColor = System.Drawing.Color.Transparent;
             this.pbStop.Image = global::WindowsSoftberyPlayer.Properties.Resources.stop;
-            this.pbStop.Location = new System.Drawing.Point(96, 30);
+            this.pbStop.Location = new System.Drawing.Point(96, 31);
             this.pbStop.Name = "pbStop";
             this.pbStop.Size = new System.Drawing.Size(40, 40);
             this.pbStop.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pbStop.TabIndex = 55;
             this.pbStop.TabStop = false;
-            this.pbStop.Click += new System.EventHandler(this.pbStop_Click);
             // 
             // pbPlay
             // 
             this.pbPlay.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.pbPlay.BackColor = System.Drawing.Color.Transparent;
             this.pbPlay.Image = global::WindowsSoftberyPlayer.Properties.Resources.play;
-            this.pbPlay.Location = new System.Drawing.Point(50, 30);
+            this.pbPlay.Location = new System.Drawing.Point(50, 31);
             this.pbPlay.Name = "pbPlay";
             this.pbPlay.Size = new System.Drawing.Size(40, 40);
             this.pbPlay.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pbPlay.TabIndex = 54;
             this.pbPlay.TabStop = false;
-            this.pbPlay.Click += new System.EventHandler(this.pbPlay_Click);
             // 
             // pbRewind
             // 
             this.pbRewind.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.pbRewind.BackColor = System.Drawing.Color.Transparent;
             this.pbRewind.Image = global::WindowsSoftberyPlayer.Properties.Resources.rewind;
-            this.pbRewind.Location = new System.Drawing.Point(4, 30);
+            this.pbRewind.Location = new System.Drawing.Point(4, 31);
             this.pbRewind.Name = "pbRewind";
             this.pbRewind.Size = new System.Drawing.Size(40, 40);
             this.pbRewind.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -364,7 +346,7 @@ namespace WindowsSoftberyPlayer.ControlBar
             this.labelVideoName.BackColor = System.Drawing.Color.Transparent;
             this.labelVideoName.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.labelVideoName.ForeColor = System.Drawing.SystemColors.Control;
-            this.labelVideoName.Location = new System.Drawing.Point(4, 12);
+            this.labelVideoName.Location = new System.Drawing.Point(4, 13);
             this.labelVideoName.Name = "labelVideoName";
             this.labelVideoName.Size = new System.Drawing.Size(131, 15);
             this.labelVideoName.TabIndex = 52;
@@ -377,7 +359,7 @@ namespace WindowsSoftberyPlayer.ControlBar
             this.labelDurationTime.BackColor = System.Drawing.Color.Transparent;
             this.labelDurationTime.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.labelDurationTime.ForeColor = System.Drawing.SystemColors.Control;
-            this.labelDurationTime.Location = new System.Drawing.Point(998, 12);
+            this.labelDurationTime.Location = new System.Drawing.Point(763, 13);
             this.labelDurationTime.Name = "labelDurationTime";
             this.labelDurationTime.Size = new System.Drawing.Size(57, 15);
             this.labelDurationTime.TabIndex = 51;
@@ -390,118 +372,19 @@ namespace WindowsSoftberyPlayer.ControlBar
             this.labelCurrentTime.BackColor = System.Drawing.Color.Transparent;
             this.labelCurrentTime.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.labelCurrentTime.ForeColor = System.Drawing.SystemColors.Control;
-            this.labelCurrentTime.Location = new System.Drawing.Point(923, 12);
+            this.labelCurrentTime.Location = new System.Drawing.Point(688, 13);
             this.labelCurrentTime.Name = "labelCurrentTime";
             this.labelCurrentTime.Size = new System.Drawing.Size(57, 15);
             this.labelCurrentTime.TabIndex = 50;
             this.labelCurrentTime.Text = "00:00:00";
             // 
-            // labelWidgetTime
-            // 
-            this.labelWidgetTime.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.labelWidgetTime.AutoSize = true;
-            this.labelWidgetTime.BackColor = System.Drawing.Color.Black;
-            this.labelWidgetTime.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.labelWidgetTime.ForeColor = System.Drawing.Color.White;
-            this.labelWidgetTime.LiveSetting = System.Windows.Forms.Automation.AutomationLiveSetting.Assertive;
-            this.labelWidgetTime.Location = new System.Drawing.Point(963, 9);
-            this.labelWidgetTime.Name = "labelWidgetTime";
-            this.labelWidgetTime.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.labelWidgetTime.Size = new System.Drawing.Size(93, 19);
-            this.labelWidgetTime.TabIndex = 37;
-            this.labelWidgetTime.Text = "00:00:00,000";
-            this.labelWidgetTime.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
-            // labelRunedEvent
-            // 
-            this.labelRunedEvent.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.labelRunedEvent.AutoSize = true;
-            this.labelRunedEvent.BackColor = System.Drawing.Color.Black;
-            this.labelRunedEvent.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.labelRunedEvent.ForeColor = System.Drawing.Color.White;
-            this.labelRunedEvent.LiveSetting = System.Windows.Forms.Automation.AutomationLiveSetting.Polite;
-            this.labelRunedEvent.Location = new System.Drawing.Point(1039, 28);
-            this.labelRunedEvent.Name = "labelRunedEvent";
-            this.labelRunedEvent.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.labelRunedEvent.Size = new System.Drawing.Size(17, 19);
-            this.labelRunedEvent.TabIndex = 38;
-            this.labelRunedEvent.Text = "0";
-            this.labelRunedEvent.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
-            // axWMP
-            // 
-            this.axWMP.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.axWMP.Enabled = true;
-            this.axWMP.Location = new System.Drawing.Point(0, 0);
-            this.axWMP.Name = "axWMP";
-            this.axWMP.OcxState = ((System.Windows.Forms.AxHost.State)(resources.GetObject("axWMP.OcxState")));
-            this.axWMP.Size = new System.Drawing.Size(1059, 498);
-            this.axWMP.TabIndex = 0;
-            this.axWMP.ClickEvent += new AxWMPLib._WMPOCXEvents_ClickEventHandler(this.axWMP_ClickEvent);
-            this.axWMP.DoubleClickEvent += new AxWMPLib._WMPOCXEvents_DoubleClickEventHandler(this.axWMP_DoubleClickEvent);
-            // 
-            // labelSubtiles1
-            // 
-            this.labelSubtiles1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.labelSubtiles1.AutoSize = true;
-            this.labelSubtiles1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(15)))), ((int)(((byte)(240)))), ((int)(((byte)(240)))), ((int)(((byte)(240)))));
-            this.labelSubtiles1.Font = new System.Drawing.Font("Calibri", 20.5F, System.Drawing.FontStyle.Bold);
-            this.labelSubtiles1.ForeColor = System.Drawing.Color.White;
-            this.labelSubtiles1.Location = new System.Drawing.Point(441, 310);
-            this.labelSubtiles1.Name = "labelSubtiles1";
-            this.labelSubtiles1.Size = new System.Drawing.Size(177, 35);
-            this.labelSubtiles1.TabIndex = 39;
-            this.labelSubtiles1.Text = "labelSubtiles1";
-            this.labelSubtiles1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.labelSubtiles1.Transparency = 30;
-            // 
-            // labelSubtiles2
-            // 
-            this.labelSubtiles2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.labelSubtiles2.AutoSize = true;
-            this.labelSubtiles2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(15)))), ((int)(((byte)(240)))), ((int)(((byte)(240)))), ((int)(((byte)(240)))));
-            this.labelSubtiles2.Font = new System.Drawing.Font("Calibri", 20.5F, System.Drawing.FontStyle.Bold);
-            this.labelSubtiles2.ForeColor = System.Drawing.Color.White;
-            this.labelSubtiles2.Location = new System.Drawing.Point(441, 345);
-            this.labelSubtiles2.Name = "labelSubtiles2";
-            this.labelSubtiles2.Size = new System.Drawing.Size(177, 35);
-            this.labelSubtiles2.TabIndex = 40;
-            this.labelSubtiles2.Text = "labelSubtiles2";
-            this.labelSubtiles2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.labelSubtiles2.Transparency = 30;
-            // 
-            // labelSubtiles3
-            // 
-            this.labelSubtiles3.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.labelSubtiles3.AutoSize = true;
-            this.labelSubtiles3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(15)))), ((int)(((byte)(240)))), ((int)(((byte)(240)))), ((int)(((byte)(240)))));
-            this.labelSubtiles3.Font = new System.Drawing.Font("Calibri", 20.5F, System.Drawing.FontStyle.Bold);
-            this.labelSubtiles3.ForeColor = System.Drawing.Color.White;
-            this.labelSubtiles3.Location = new System.Drawing.Point(441, 380);
-            this.labelSubtiles3.Name = "labelSubtiles3";
-            this.labelSubtiles3.Size = new System.Drawing.Size(177, 35);
-            this.labelSubtiles3.TabIndex = 41;
-            this.labelSubtiles3.Text = "labelSubtiles3";
-            this.labelSubtiles3.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.labelSubtiles3.Transparency = 30;
-            // 
-            // VideoControlBar
+            // ControlBar
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.Color.Black;
-            this.Controls.Add(this.labelSubtiles3);
-            this.Controls.Add(this.labelSubtiles1);
-            this.Controls.Add(this.labelRunedEvent);
-            this.Controls.Add(this.labelSubtiles2);
-            this.Controls.Add(this.labelWidgetTime);
             this.Controls.Add(this.panelControl);
-            this.Controls.Add(this.axWMP);
-            this.Name = "VideoControlBar";
-            this.Size = new System.Drawing.Size(1059, 498);
+            this.Name = "ControlBar";
+            this.Size = new System.Drawing.Size(824, 81);
             this.panelControl.ResumeLayout(false);
             this.panelControl.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbSubtilesOnOff)).EndInit();
@@ -515,17 +398,16 @@ namespace WindowsSoftberyPlayer.ControlBar
             ((System.ComponentModel.ISupportInitialize)(this.pbStop)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbPlay)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbRewind)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.axWMP)).EndInit();
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
         #endregion
+
         private System.Windows.Forms.Panel panelControl;
-        private System.Windows.Forms.Label labelWidgetTime;
-        private System.Windows.Forms.Label labelRunedEvent;
-        private AxWMPLib.AxWindowsMediaPlayer axWMP;
+        private System.Windows.Forms.Label labelSubtilesOnOffText;
+        private System.Windows.Forms.Label labelOnOff;
+        private System.Windows.Forms.PictureBox pbSubtilesOnOff;
         private MB.Controls.ColorSliderV2 colorSliderTrackBar;
         private System.Windows.Forms.PictureBox pbSettings;
         private System.Windows.Forms.PictureBox pbVolumeDown;
@@ -542,11 +424,5 @@ namespace WindowsSoftberyPlayer.ControlBar
         private System.Windows.Forms.Label labelVideoName;
         private System.Windows.Forms.Label labelDurationTime;
         private System.Windows.Forms.Label labelCurrentTime;
-        private System.Windows.Forms.PictureBox pbSubtilesOnOff;
-        private System.Windows.Forms.Label labelSubtilesOnOffText;
-        private System.Windows.Forms.Label labelOnOff;
-        private Labels.LabelSubtiles labelSubtiles1;
-        private Labels.LabelSubtiles labelSubtiles2;
-        private Labels.LabelSubtiles labelSubtiles3;
     }
 }
